@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loop Mídia - Soluções Digitais Inteligentes</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #f6a93c; /* Laranja Loop Mídia */
+      --secondary-color: #e65100; /* Laranja mais escuro para contraste/botões */
+      --dark-bg: #1a0e12; /* Fundo escuro original */
+      --light-bg-section: #2a1b23; /* Fundo para seções destacadas */
+      --text-color-light: #f0f0f0;
+      --text-color-dark: #333;
+      --card-bg: #22131a;
+      --border-color: #44303a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--dark-bg);
+      color: var(--text-color-light);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px 0;
+    }
+
+    /* Header e Navegação */
+    header {
+      background-color: var(--dark-bg);
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 90%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .nav-logo img {
+      max-height: 50px;
+      transition: transform 0.3s ease;
+    }
+    .nav-logo img:hover {
+        transform: scale(1.05);
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+    }
+
+    .nav-links li {
+      margin-left: 25px;
+    }
+
+    .nav-links a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.3s ease;
+      padding-bottom: 5px;
+      border-bottom: 2px solid transparent;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: #fff;
+      border-bottom-color: var(--secondary-color);
+    }
+    .menu-toggle {
+        display: none; /* Oculto em desktop */
+        font-size: 1.8rem;
+        color: var(--primary-color);
+        cursor: pointer;
+    }
+
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(rgba(26, 14, 18, 0.8), rgba(26, 14, 18, 0.8)), url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat; /* Imagem de fundo genérica */
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--primary-color);
+    }
+    .hero .logo-hero {
+        max-width: 250px;
+        margin-bottom: 30px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      max-width: 700px;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: var(--primary-color);
+      color: var(--dark-bg);
+      padding: 12px 30px;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      border: 2px solid var(--primary-color);
+    }
+
+    .btn:hover {
+      background-color: var(--secondary-color);
+      border-color: var(--secondary-color);
+      transform: translateY(-3px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .btn-secondary {
+        background-color: transparent;
+        color: var(--primary-color);
+        border: 2px solid var(--primary-color);
+    }
+    .btn-secondary:hover {
+        background-color: var(--primary-color);
+        color: var(--dark-bg);
+    }
+
+
+    /* Seções Padrão */
+    section {
+      padding: 60px 0;
+    }
+    section:nth-child(even) { /* Alterna cor de fundo */
+        background-color: var(--light-bg-section);
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.2rem;
+      color: var(--primary-color);
+      margin-bottom: 40px;
+      position: relative;
+      padding-bottom: 15px;
+    }
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 70px;
+        height: 3px;
+        background-color: var(--secondary-color);
+    }
+
+
+    /* Sobre Nós */
+    #sobre .about-content {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+    }
+    #sobre .about-text {
+        flex: 1;
+    }
+    #sobre .about-image img {
+        max-width: 350px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    .mission-vision-values {
+        margin-top: 30px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+    .mvv-item {
+        background-color: var(--card-bg);
+        padding: 20px;
+        border-radius: 8px;
+        border-left: 4px solid var(--primary-color);
+    }
+    .mvv-item h3 {
+        color: var(--primary-color);
+        margin-bottom: 10px;
+        font-size: 1.3rem;
+    }
+
+
+    /* Nossos Serviços/Produtos */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .service-card {
+      background-color: var(--card-bg);
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid var(--border-color);
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+
+    .service-card .icon {
+      font-size: 3rem;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+    }
+
+    .service-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: var(--primary-color);
+    }
+    .service-card p {
+        font-size: 0.95rem;
+        margin-bottom: 20px;
+    }
+
+
+    /* Planos */
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+    .plan-card {
+      background-color: var(--card-bg);
+      padding: 25px;
+      border-radius: 10px;
+      text-align: center;
+      border: 2px solid var(--primary-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.3s ease;
+    }
+    .plan-card:hover {
+        transform: scale(1.03);
+    }
+    .plan-card.featured { /* Plano em destaque */
+        border-color: var(--secondary-color);
+        transform: scale(1.05);
+    }
+    .plan-card h3 {
+      font-size: 1.6rem;
+      color: var(--primary-color);
+      margin-bottom: 15px;
+    }
+    .plan-card .price {
+      font-size: 2.2rem;
+      font-weight: bold;
+      color: var(--text-color-light);
+      margin-bottom: 10px;
+    }
+    .plan-card .price span {
+      font-size: 1rem;
+      font-weight: normal;
+      color: #ccc;
+    }
+    .plan-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+      text-align: left;
+      flex-grow: 1;
+    }
+    .plan-card ul li {
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+      padding-left: 25px;
+      position: relative;
+    }
+    .plan-card ul li::before {
+        content: '\f00c'; /* Font Awesome check icon */
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        color: var(--primary-color);
+        position: absolute;
+        left: 0;
+    }
+
+    /* Seção "Quem Pode Usar" / Público Alvo */
+    #publico-alvo p {
+        text-align: center;
+        font-size: 1.1rem;
+        max-width: 700px;
+        margin: 0 auto 30px auto;
+    }
+    .target-audience-icons {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+    .audience-item {
+        text-align: center;
+    }
+    .audience-item .icon {
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        margin-bottom: 10px;
+        background-color: var(--card-bg);
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid var(--border-color);
+    }
+
+
+    /* Contato */
+    #contato .container {
+        text-align: center;
+    }
+    #contato p {
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #12070b;
+      color: #aaa;
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 0.9rem;
+    }
+    footer .social-links a {
+        color: var(--primary-color);
+        margin: 0 10px;
+        font-size: 1.5rem;
+        transition: color 0.3s ease;
+    }
+    footer .social-links a:hover {
+        color: #fff;
+    }
+    footer p { margin-top: 15px;}
+
+
+    /* Botão WhatsApp Flutuante */
+    .whatsapp-float {
+      position: fixed;
+      width: 60px;
+      height: 60px;
+      bottom: 30px;
+      right: 30px;
+      background-color: #25D366;
+      color: #FFF;
+      border-radius: 50px;
+      text-align: center;
+      font-size: 30px;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease;
+    }
+    .whatsapp-float:hover {
+        transform: scale(1.1);
+    }
+    .whatsapp-float i {
+        margin-top: 1px; /* Ajuste fino do ícone */
+    }
+
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none; /* Esconde links em mobile */
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 70px; /* Altura do header */
+        left: 0;
+        background-color: var(--dark-bg);
+        border-top: 1px solid var(--border-color);
+      }
+      .nav-links.active {
+          display: flex; /* Mostra quando ativo */
+      }
+      .nav-links li {
+        margin: 0;
+        text-align: center;
+      }
+      .nav-links a {
+        display: block;
+        padding: 15px;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .nav-links a:hover, .nav-links a.active {
+          background-color: var(--light-bg-section);
+          border-bottom-color: var(--secondary-color); /* Mantém a borda ao passar o mouse */
+      }
+      .menu-toggle {
+        display: block; /* Mostra o ícone do menu hamburguer */
+      }
+
+      .hero h1 { font-size: 2.2rem; }
+      .hero p { font-size: 1rem; }
+      #sobre .about-content { flex-direction: column; }
+      #sobre .about-image img { max-width: 100%; margin-top: 20px; }
+      .section-title { font-size: 1.8rem; }
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="#hero" class="nav-logo">
+        <img src="https://i.ibb.co/4w6Rk3sY/Imagem-do-Whats-App-de-2025-05-19-s-15-59-47-d67067d2.jpg" alt="Loop Mídia Logo" />
+        <!-- Nota: a URL da sua imagem no HTML original estava quebrada, corrigi -->
+        <!-- A URL original era: https://i.ibb.co/bjzHvX0M/Imagem-do-Whats-App-de-2025-05-05-s-13-00-14-2ec43c68.jpg alt="Loop Mídia" /> -->
+        <!-- Se a URL acima ainda estiver errada, substitua pela URL correta da sua logo -->
+      </a>
+      <div class="menu-toggle" id="mobile-menu">
+        <i class="fas fa-bars"></i>
+      </div>
+      <ul class="nav-links" id="nav-menu">
+        <li><a href="#hero" class="active">Início</a></li>
+        <li><a href="#sobre">Sobre Nós</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#planos">Planos</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="hero" class="hero">
+    <img src="https://i.ibb.co/4w6Rk3sY/Imagem-do-Whats-App-de-2025-05-19-s-15-59-47-d67067d2.jpg" alt="Loop Mídia" class="logo-hero"/>
+    <h1>KardApp</h1>
+    <p>Transformamos a maneira como seu negócio se conecta com clientes através de soluções digitais inteligentes e impactantes.</p>
+    <a href="#servicos" class="btn">Nossos Serviços</a><br>
+    <a href="#contato" class="btn btn-secondary">Fale Conosco</a>
+  </section>
+
+  <section id="sobre">
+    <div class="container">
+      <h2 class="section-title">Quem Somos</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <p>
+            A <strong>Kardapp</strong> é especialista em impulsionar negócios como o seu para o futuro digital. Com foco em <strong>visibilidade, praticidade e resultados</strong>, oferecemos soluções que modernizam sua marca e otimizam a experiência do seu cliente.
+          </p>
+          <p>
+            Desde cardápios digitais interativos que encantam e facilitam pedidos, até painéis de mídia indoor que capturam a atenção, nossa missão é fornecer as ferramentas para que você se destaque.
+          </p>
+          <div class="mission-vision-values">
+            <div class="mvv-item">
+              <h3><i class="fas fa-bullseye"></i> Missão</h3>
+              <p>Facilitar o acesso de pequenos e médios negócios a soluções digitais de impacto, promovendo crescimento e modernização.</p>
+            </div>
+            <div class="mvv-item">
+              <h3><i class="fas fa-eye"></i> Visão</h3>
+              <p>Ser referência em cardápios e mídia digital no Brasil, reconhecida pela inovação e excelência no atendimento.</p>
+            </div>
+            <div class="mvv-item">
+              <h3><i class="fas fa-gem"></i> Valores</h3>
+              <p>Inovação contínua, simplicidade nas soluções, transparência total e uma parceria próxima com cada cliente.</p>
+            </div>
+          </div>
+        </div>
+        <div class="about-image">
+            <!-- Coloque uma imagem representativa da sua equipe ou do ambiente de trabalho aqui -->
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Equipe Kardapp">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="servicos">
+    <div class="container">
+      <h2 class="section-title">Nossas Soluções</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="icon"><i class="fas fa-tablet-alt"></i></div>
+          <h3>Cardápio Digital Interativo</h3>
+          <p>Modernize seu atendimento com cardápios digitais personalizáveis, com QR code, carrinho de compras e pedidos via WhatsApp. Aumente suas vendas e melhore a experiência do cliente.</p>
+          <a href="#planos" class="btn btn-secondary">Ver Planos</a>
+        </div>
+        <div class="service-card">
+          <div class="icon"><i class="fas fa-tv"></i></div>
+          <h3>Mídia Indoor Inteligente</h3>
+          <p>Maximize o impacto da sua comunicação com painéis digitais dinâmicos. Ideal para promoções, informações e entretenimento no seu ponto de venda.</p>
+           <a href="#contato" class="btn btn-secondary">Saiba Mais</a>
+        </div>
+        <div class="service-card">
+          <div class="icon"><i class="fas fa-cash-register"></i></div>
+          <h3>Sistema PDV Simplificado</h3>
+          <p>Gerencie suas vendas, estoque e clientes de forma eficiente com nosso sistema de Ponto de Venda prático e intuitivo. (Em breve!)</p>
+           <a href="#contato" class="btn btn-secondary">Tenho Interesse</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="planos">
+    <div class="container">
+      <h2 class="section-title">Planos do Cardápio Digital</h2>
+      <div class="plans-grid">
+        <div class="plan-card">
+          <h3>Essencial</h3>
+          <div class="price">R$ 79 <span>/mês</span></div>
+          <ul>
+            <li>Cardápio digital interativo</li>
+            <li>QR Code para acesso</li>
+            <li>Envio de pedidos via WhatsApp</li>
+            <li>Suporte básico</li>
+          </ul>
+          <a href="#contato" class="btn">Quero o Essencial</a>
+        </div>
+        <div class="plan-card featured"> <!-- Plano em destaque -->
+          <h3>Profissional</h3>
+          <div class="price">R$ 149 <span>/mês</span></div>
+          <ul>
+            <li>Tudo do Essencial</li>
+            <li>Design com identidade visual</li>
+            <li>Personalização avançada (ex: sorvetes)</li>
+            <li>Atualizações de cardápio</li>
+            <li>Suporte prioritário</li>
+          </ul>
+          <a href="#contato" class="btn">Quero o Profissional</a>
+        </div>
+        <div class="plan-card">
+          <h3>Empresarial</h3>
+          <div class="price">R$ 299 <span>/mês</span></div>
+          <ul>
+            <li>Tudo do Profissional</li>
+            <li>Domínio personalizado (seunome.com.br)</li>
+            <li>Múltiplos QR Codes (por mesa)</li>
+            <li>Relatórios básicos</li>
+          </ul>
+          <a href="#contato" class="btn">Quero o Empresarial</a>
+        </div>
+         <div class="plan-card">
+          <h3>Premium</h3>
+          <div class="price">R$ 499 <span>/mês</span></div>
+          <ul>
+            <li>Tudo do Empresarial</li>
+            <li>Integração com painel de pedidos*</li>
+            <li>Cartão de visita digital interativo</li>
+            <li>Consultoria estratégica</li>
+          </ul>
+          <a href="#contato" class="btn">Quero o Premium</a>
+          <small style="font-size:0.75rem; margin-top:10px; display:block;">*Painel de pedidos pode ter custo adicional ou ser parte de outro serviço.</small>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section id="publico-alvo">
+    <div class="container">
+        <h2 class="section-title">Ideal Para Diversos Negócios</h2>
+        <p>Nossas soluções são perfeitas para modernizar e impulsionar estabelecimentos como:</p>
+        <div class="target-audience-icons">
+            <div class="audience-item">
+                <div class="icon"><i class="fas fa-pizza-slice"></i></div>
+                <p>Pizzarias</p>
+            </div>
+            <div class="audience-item">
+                <div class="icon"><i class="fas fa-hamburger"></i></div>
+                <p>Hamburguerias</p>
+            </div>
+            <div class="audience-item">
+                <div class="icon"><i class="fas fa-coffee"></i></div>
+                <p>Cafeterias & Bares</p>
+            </div>
+            <div class="audience-item">
+                <div class="icon"><i class="fas fa-ice-cream"></i></div>
+                <p>Sorveterias & Docerias</p>
+            </div>
+             <div class="audience-item">
+                <div class="icon"><i class="fas fa-store"></i></div>
+                <p>Lojas e Comércio</p>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <section id="contato">
+    <div class="container">
+      <h2 class="section-title">Vamos Conversar?</h2>
+      <p>Pronto para levar seu negócio ao próximo nível com soluções digitais inovadoras? <br>Clique no botão abaixo e fale diretamente conosco pelo WhatsApp!</p>
+      <a href="https://wa.me/5511965829000?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20as%20soluções%20da%20Loop%20Mídia." class="btn" target="_blank">
+        <i class="fab fa-whatsapp"></i> Chamar no WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <a href="https://wa.me/5511965829000?text=Olá!%20Vi%20o%20site%20da%20Kardapp%20e%20gostaria%20de%20mais%20informações." class="whatsapp-float" target="_blank" title="Fale Conosco via WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <footer>
+    <div class="container">
+        <div class="social-links">
+            <a href="https://instagram.com/kardapp" target="_blank" title="Instagram Kardapp"><i class="fab fa-instagram"></i></a>
+            <!-- Adicione links para outras redes sociais se tiver -->
+            <!-- <a href="#" target="_blank" title="Facebook Kardapp"><i class="fab fa-facebook-f"></i></a> -->
+        </div>
+      <p>© <span id="currentYear"></span> Kardapp - Todos os direitos reservados.</p>
+      <p>Email: contato@kardapp.com.br</p>
+    </div>
+  </footer>
+
+<script>
+    // Menu Mobile
+    const mobileMenuToggle = document.getElementById('mobile-menu');
+    const navMenu = document.getElementById('nav-menu');
+
+    mobileMenuToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        mobileMenuToggle.querySelector('i').classList.toggle('fa-bars');
+        mobileMenuToggle.querySelector('i').classList.toggle('fa-times');
+    });
+
+    // Fechar menu ao clicar em um link (para mobile)
+    navMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                mobileMenuToggle.querySelector('i').classList.remove('fa-times');
+                mobileMenuToggle.querySelector('i').classList.add('fa-bars');
+            }
+        });
+    });
+    
+    // Atualizar ano no footer
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    // Active link no scroll (opcional, mas dá um toque legal)
+    const sections = document.querySelectorAll('section[id]');
+    function navHighlighter() {
+    let scrollY = window.pageYOffset;
+    sections.forEach(current => {
+        const sectionHeight = current.offsetHeight;
+        const sectionTop = current.offsetTop - 100; // Ajuste para o header fixo
+        let sectionId = current.getAttribute('id');
+        
+        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight){
+        document.querySelector('.nav-links a[href*=' + sectionId + ']').classList.add('active');
+        } else {
+        document.querySelector('.nav-links a[href*=' + sectionId + ']').classList.remove('active');
+        }
+    });
+    }
+    window.addEventListener('scroll', navHighlighter);
+    // Chama uma vez para definir o link ativo no carregamento
+    navHighlighter();
+
+</script>
+
+</body>
+</html>

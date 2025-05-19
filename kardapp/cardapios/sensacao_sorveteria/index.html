@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cardápio Digital - Sensação Sorveteria</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: rgb(91, 119, 1); /* Verde Principal */
+      --secondary-color: #F9A825; /* Amarelo/Dourado para destaque (inspirado no logo) */
+      --accent-color: rgb(88, 112, 6); /* Verde Escuro para hover/detalhes */
+      --light-background: rgb(243, 255, 208); /* Verde bem clarinho para fundo da página */
+      --text-on-primary: #FFFFFF; /* Texto em botões com fundo verde principal */
+      --card-background: #FFFFFF; /* Fundo dos cards de item */
+      --dark-text-color: #333333; /* Cor de texto principal */
+      --modal-bg: rgba(0, 0, 0, 0.6);
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--light-background);
+      color: var(--dark-text-color);
+      line-height: 1.6;
+    }
+    
+    .container { /* Container geral da página */
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    header {
+      background-color: var(--primary-color);
+      color: var(--text-on-primary);
+      padding: 10px 0; 
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+    }
+
+    header .container { /* Container específico do header */
+      display: flex; 
+      align-items: center; 
+      justify-content: flex-start; 
+      padding: 0 20px; 
+    }
+
+    header .logo-container {
+        margin-bottom: 0; 
+        margin-right: 15px; 
+    }
+
+    header .logo-container img {
+        max-width: 60px; 
+        height: auto;
+        border-radius: 50%;
+        border: 2px solid var(--text-on-primary); 
+    }
+    
+    header h1 {
+      font-size: 1.8rem; 
+      margin-bottom: 0; 
+      font-weight: 700;
+    }
+    
+    .search-bar {
+      padding: 15px;
+      background-color: var(--card-background);
+      border-radius: 10px;
+      margin: 20px auto;
+      max-width: 600px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .search-bar input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #ddd;
+      border-radius: 30px;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    
+    .search-bar input:focus {
+      border-color: var(--primary-color);
+    }
+    
+    .categories {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+    
+    .category-btn {
+      padding: 10px 20px;
+      background-color: var(--card-background);
+      border: 2px solid var(--primary-color);
+      border-radius: 30px;
+      color: var(--primary-color);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .category-btn.active, .category-btn:hover {
+      background-color: var(--primary-color);
+      color: var(--text-on-primary);
+    }
+    
+    .menu-items {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+    
+    .menu-item {
+      background-color: var(--card-background);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); 
+      transition: transform 0.3s;
+      display: flex; 
+      flex-direction: column;
+    }
+    
+    .menu-item.hidden {
+        display: none;
+    }
+    
+    .menu-item:hover {
+      transform: translateY(-5px);
+    }
+    
+    .item-content {
+      padding: 20px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center; 
+      margin-bottom: 10px;
+    }
+    
+    .item-name {
+      font-size: 1.3rem; 
+      font-weight: 700;
+      color: var(--primary-color);
+      flex-grow: 1; 
+      margin-right: 5px; 
+    }
+    
+    .item-price {
+      font-size: 1.1rem; 
+      font-weight: 700;
+      color: var(--dark-text-color);
+      white-space: nowrap; 
+      flex-shrink: 0; 
+    }
+    
+    .item-description {
+      color: #666;
+      margin-bottom: 15px;
+      font-size: 0.9rem; 
+      flex-grow: 1;
+    }
+        
+    .add-to-cart, .customize-item-btn {
+      width: 100%;
+      padding: 12px;
+      background-color: var(--primary-color);
+      color: var(--text-on-primary);
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: auto; 
+    }
+    
+    .add-to-cart:hover, .customize-item-btn:hover {
+      background-color: var(--accent-color);
+    }
+    
+    .cart-section {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: var(--card-background);
+      box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+      padding: 15px;
+      transform: translateY(100%);
+      transition: transform 0.3s;
+      z-index: 100;
+      border-radius: 20px 20px 0 0;
+    }
+    
+    .cart-section.show {
+      transform: translateY(0);
+    }
+    
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .cart-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+    
+    .close-cart {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #777;
+    }
+    
+    .cart-items {
+      max-height: 300px;
+      overflow-y: auto;
+      margin-bottom: 15px;
+    }
+    
+    .cart-item {
+      display: flex;
+      align-items: flex-start; 
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .cart-item-details {
+        flex-grow: 1;
+    }
+
+    .cart-item-name {
+      font-weight: 500;
+      display: block; 
+    }
+    .cart-item-sub-details {
+        font-size: 0.85rem;
+        color: #555;
+        margin-left: 15px;
+        display: block;
+    }
+    
+    .cart-item-price {
+      font-weight: 600;
+      margin: 0 10px;
+      white-space: nowrap;
+    }
+    
+    .cart-item-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px; 
+      margin-left: auto; 
+    }
+    
+    .cart-item-actions button {
+      background: none;
+      border: none;
+      font-size: 1.1rem; 
+      cursor: pointer;
+      color: var(--primary-color);
+      padding: 2px 4px;
+    }
+     .cart-item-actions .edit-item { 
+        color: #555; 
+     }
+     .cart-item-actions .edit-item:hover {
+         color: var(--primary-color);
+     }
+    
+    .cart-total {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 15px 0;
+    }
+    
+    .checkout-btn { 
+      width: 100%;
+      padding: 15px;
+      background-color: var(--secondary-color); 
+      color: var(--dark-text-color); 
+      border: none;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    
+    .checkout-btn:hover {
+      background-color: #e69500; 
+    }
+    
+    .cart-icon {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: var(--primary-color);
+      color: var(--text-on-primary);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      z-index: 99;
+    }
+    
+    .cart-count {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background-color: var(--secondary-color); 
+      color: var(--dark-text-color); 
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    
+    .checkout-form {
+      display: none;
+      padding: 20px;
+      background-color: var(--card-background);
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      margin-top: 20px;
+    }
+    
+    .form-group {
+      margin-bottom: 15px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+    
+    .form-group input, 
+    .form-group textarea, 
+    .form-group select {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    
+    .form-group textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+    
+    .payment-method {
+      margin-top: 20px;
+    }
+    
+    .payment-option {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    
+    .payment-option input {
+      margin-right: 10px;
+    }
+    
+    .cash-group {
+      margin-top: 15px;
+      padding: 15px;
+      background-color: #f9f9f9; 
+      border-radius: 8px;
+      display: none;
+    }
+    
+    .back-to-cart {
+      background: none;
+      border: none;
+      color: var(--primary-color);
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 15px;
+    }
+
+    .flavor-modal {
+      display: none; 
+      position: fixed;
+      z-index: 1001;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: var(--modal-bg);
+      padding-top: 60px;
+    }
+
+    .modal-content {
+      background-color: var(--card-background);
+      margin: 5% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 90%;
+      max-width: 500px;
+      border-radius: 10px;
+      position: relative;
+    }
+
+    .close-modal-btn {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close-modal-btn:hover,
+    .close-modal-btn:focus {
+      color: var(--dark-text-color);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .modal-title {
+      color: var(--primary-color);
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+    .options-group h4 {
+        margin-top: 15px;
+        margin-bottom: 8px;
+        font-size: 1.1rem;
+        color: var(--dark-text-color);
+    }
+    .options-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .options-list label {
+        display: flex;
+        align-items: center;
+        background-color: var(--light-background); 
+        padding: 8px 12px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        color: var(--dark-text-color);
+        border: 1px solid var(--primary-color); 
+    }
+    .options-list input[type="checkbox"] {
+        margin-right: 8px;
+        accent-color: var(--primary-color); 
+    }
+    .modal-confirm-btn {
+      background-color: var(--primary-color);
+      color: var(--text-on-primary);
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 20px;
+      display: block;
+      width: 100%;
+    }
+    .modal-confirm-btn:hover {
+        background-color: var(--accent-color);
+    }
+    
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 1.5rem; 
+      }
+      header .logo-container img {
+        max-width: 50px; 
+      }
+      header .container {
+        padding: 0 15px; 
+      }
+
+      .menu-items {
+        grid-template-columns: 1fr;
+      }
+      .cart-item-actions {
+        gap: 5px;
+      }
+      .cart-item-actions button {
+          font-size: 1rem;
+      }
+      .cart-section {
+        padding: 15px 10px;
+      }
+      .modal-content {
+        width: 95%;
+        padding-top: 40px; 
+      }
+      .modal-title {
+        font-size: 1.3rem;
+      }
+      .options-group h4 {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container"> 
+      <div class="logo-container">
+        <img src="https://i.imgur.com/zR72G9D.png" alt="Logo Sensação Sorveteria">
+      </div>
+      <h1>Sensação Sorveteria</h1>
+    </div>
+  </header>
+  
+  <div class="container"> 
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="Pesquisar no cardápio...">
+    </div>
+    
+    <div class="categories">
+      <button class="category-btn active" data-category="todos">Todos</button>
+      <button class="category-btn" data-category="picoles">Picolés</button>
+      <button class="category-btn" data-category="sorvetes_massa">Sorvetes de Massa</button>
+    </div>
+    
+    <div class="menu-items">
+      <!-- PICOLÉS -->
+      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Manga</h3><span class="item-price">R$ 4,00</span></div><p class="item-description">Refrescante picolé sabor manga.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
+      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Maracujá</h3><span class="item-price">R$ 4,00</span></div><p class="item-description">Delicioso picolé sabor maracujá.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
+      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Uva</h3><span class="item-price">R$ 4,00</span></div><p class="item-description">Saboroso picolé de uva.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
+      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Limão</h3><span class="item-price">R$ 4,00</span></div><p class="item-description">Picolé cítrico de limão.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
+      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Coco</h3><span class="item-price">R$ 4,00</span></div><p class="item-description">Tradicional picolé de coco.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
+      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Groselha</h3><span class="item-price">R$ 4,00</span></div><p class="item-description">Doce picolé de groselha.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
+      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Tangerina</h3><span class="item-price">R$ 4,00</span></div><p class="item-description">Picolé refrescante de tangerina.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
+      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Goiaba</h3><span class="item-price">R$ 4,00</span></div><p class="item-description">Picolé com o autêntico sabor de goiaba.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
+      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Chocolate</h3><span class="item-price">R$ 4,50</span></div><p class="item-description">Clássico picolé de chocolate.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
+      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Morango</h3><span class="item-price">R$ 4,00</span></div><p class="item-description">Delicado picolé de morango.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
+      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Mousse de Maracujá</h3><span class="item-price">R$ 5,00</span></div><p class="item-description">Cremoso picolé mousse de maracujá.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
+      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Limão Suíço</h3><span class="item-price">R$ 5,00</span></div><p class="item-description">Refrescante picolé de limão suíço.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
+      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Amendoim</h3><span class="item-price">R$ 4,50</span></div><p class="item-description">Saboroso picolé de amendoim.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
+      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Abacaxi</h3><span class="item-price">R$ 4,00</span></div><p class="item-description">Picolé tropical de abacaxi.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
+      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Milho Verde</h3><span class="item-price">R$ 4,00</span></div><p class="item-description">Autêntico picolé de milho verde.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
+      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Leite Condensado</h3><span class="item-price">R$ 5,00</span></div><p class="item-description">Doce e cremoso picolé de leite condensado.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
+      
+      <div class="menu-item" data-category="sorvetes_massa">
+        <div class="item-content">
+          <div class="item-header">
+            <h3 class="item-name">Sorvete no Copo (Até 2 Sabores)</h3>
+            <span class="item-price">R$ 12,00</span>
+          </div>
+          <p class="item-description">
+            Escolha até 2 dos seus sabores de massa favoritos e até 3 acompanhamentos deliciosos!
+          </p>
+          <button class="customize-item-btn" data-item-id="sorvete-copo-2sabores" data-item-name="Sorvete no Copo (Até 2 Sabores)" data-item-price="12.00" data-max-flavors="2" data-max-toppings="3">
+            <i class="fas fa-ice-cream"></i> Personalizar
+          </button>
+        </div>
+      </div>
+
+       <div class="menu-item" data-category="sorvetes_massa">
+        <div class="item-content">
+          <div class="item-header">
+            <h3 class="item-name">Sorvete no Copo Grande (Até 3 Sabores)</h3>
+            <span class="item-price">R$ 18,00</span>
+          </div>
+          <p class="item-description">
+            Mais sorvete, mais sabor! Escolha até 3 sabores de massa e até 4 acompanhamentos.
+          </p>
+          <button class="customize-item-btn" data-item-id="sorvete-copo-3sabores" data-item-name="Sorvete no Copo Grande (Até 3 Sabores)" data-item-price="18.00" data-max-flavors="3" data-max-toppings="4">
+            <i class="fas fa-ice-cream"></i> Personalizar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div> 
+  
+  <div class="cart-icon">
+    <i class="fas fa-shopping-cart"></i>
+    <span class="cart-count">0</span>
+  </div>
+  
+  <div class="cart-section">
+    <div class="container"> 
+      <div class="cart-header">
+        <h3 class="cart-title">Seu Pedido</h3>
+        <button class="close-cart"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="cart-items"></div>
+      <div class="cart-total">
+        <span>Total:</span>
+        <span class="total-amount">R$ 0,00</span>
+      </div>
+      <button class="checkout-btn" id="checkout-btn">
+        <i class="fab fa-whatsapp"></i> Finalizar Pedido
+      </button>
+      <div class="checkout-form" id="checkout-form">
+        <button class="back-to-cart" id="back-to-cart">
+          <i class="fas fa-arrow-left"></i> Voltar ao carrinho
+        </button>
+        <div class="form-group">
+          <label for="customer-name">Nome:</label>
+          <input type="text" id="customer-name" placeholder="Seu nome completo" required>
+        </div>
+        <div class="form-group">
+          <label for="customer-phone">Telefone (WhatsApp):</label>
+          <input type="tel" id="customer-phone" placeholder="(XX) XXXXX-XXXX" required>
+        </div>
+        <div class="form-group">
+          <label for="delivery-address">Endereço de Entrega (ou "Retirar no local"):</label>
+          <input type="text" id="delivery-address" placeholder="Rua, número, bairro, complemento" required>
+        </div>
+        <div class="form-group">
+          <label for="order-notes">Observações:</label>
+          <textarea id="order-notes" placeholder="Alguma observação sobre seu pedido? (Ex: sem algum ingrediente, ponto de referência)"></textarea>
+        </div>
+        <div class="payment-method">
+          <h4>Forma de Pagamento:</h4>
+          <div class="payment-option">
+            <input type="radio" id="payment-pix" name="payment" value="Pix" checked>
+            <label for="payment-pix">Pix</label>
+          </div>
+          <div class="payment-option">
+            <input type="radio" id="payment-card" name="payment" value="Cartão">
+            <label for="payment-card">Cartão (na entrega)</label>
+          </div>
+          <div class="payment-option">
+            <input type="radio" id="payment-cash" name="payment" value="Dinheiro">
+            <label for="payment-cash">Dinheiro</label>
+          </div>
+          <div class="cash-group" id="cash-group">
+            <div class="form-group">
+              <label for="cash-amount">Valor em dinheiro para troco:</label>
+              <input type="number" id="cash-amount" placeholder="Ex: 50 (para R$50,00)">
+            </div>
+            <div class="form-group">
+              <label>Troco:</label>
+              <input type="text" id="change-amount" placeholder="R$ 0,00" readonly>
+            </div>
+          </div>
+        </div>
+        <button class="checkout-btn" id="send-order-btn"> 
+          <i class="fas fa-paper-plane"></i> Enviar Pedido via WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="flavorModal" class="flavor-modal">
+    <div class="modal-content">
+      <span class="close-modal-btn">×</span>
+      <h3 id="modalItemName" class="modal-title">Personalize seu Sorvete</h3>
+      <input type="hidden" id="editingItemIndex" value="-1">
+      <div id="modalFlavorOptions" class="options-group">
+        <h4>Escolha até <span id="maxFlavorsCount">2</span> sabores de massa:</h4>
+        <div class="options-list" id="flavorList"></div>
+      </div>
+      <div id="modalToppingOptions" class="options-group">
+        <h4>Escolha até <span id="maxToppingsCount">3</span> acompanhamentos/caldas:</h4>
+        <div class="options-list" id="toppingList"></div>
+      </div>
+      <button id="confirmFlavorSelection" class="modal-confirm-btn">Confirmar e Adicionar</button>
+    </div>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const cartIcon = document.querySelector('.cart-icon');
+      const cartSection = document.querySelector('.cart-section');
+      const closeCartBtn = document.querySelector('.close-cart');
+      const checkoutBtn = document.getElementById('checkout-btn');
+      const backToCartBtn = document.getElementById('back-to-cart');
+      const checkoutForm = document.getElementById('checkout-form');
+      const sendOrderBtn = document.getElementById('send-order-btn');
+      const cartItemsContainer = document.querySelector('.cart-items');
+      const cartCount = document.querySelector('.cart-count');
+      const totalAmount = document.querySelector('.total-amount');
+      const addToCartButtons = document.querySelectorAll('.add-to-cart');
+      const customizeItemButtons = document.querySelectorAll('.customize-item-btn');
+      const categoryButtons = document.querySelectorAll('.category-btn');
+      const menuItems = document.querySelectorAll('.menu-item');
+      const searchInput = document.getElementById('search-input');
+
+      const paymentOptions = document.querySelectorAll('input[name="payment"]');
+      const cashGroup = document.getElementById('cash-group');
+      const cashAmount = document.getElementById('cash-amount');
+      const changeAmount = document.getElementById('change-amount');
+
+      const flavorModal = document.getElementById('flavorModal');
+      const closeModalFlavorBtn = flavorModal.querySelector('.close-modal-btn');
+      const confirmFlavorSelectionBtn = document.getElementById('confirmFlavorSelection');
+      const modalItemNameEl = document.getElementById('modalItemName');
+      const flavorListEl = document.getElementById('flavorList');
+      const toppingListEl = document.getElementById('toppingList');
+      const maxFlavorsCountEl = document.getElementById('maxFlavorsCount');
+      const maxToppingsCountEl = document.getElementById('maxToppingsCount');
+      const editingItemIndexInput = document.getElementById('editingItemIndex'); 
+      
+      let currentCustomizingItemDetails = null; 
+
+      const availableFlavors = [
+        "Raffaello", "Pistache", "Doce de Leite", "Abacaxi com Pedaços", "ChocoRum com Passas",
+        "Pera", "Jabuticaba", "Mousse de Maracujá", "Iogurte com Laranja", "Jaca",
+        "Cupuaçu", "CHOCOMENTA", "Banana Trufada", "Chocolate", "Milho", "Açaí",
+        "Ninho Trufado", "Limão Nevado", "Morango", "Amarena Iogurte com Cereja",
+        "Pão de Mel", "Paçoca", "Flocos"
+      ];
+      
+      const availableToppings = [
+        "Pingos de Chocolate", "Amendoim Triturado", "Bala de Coco", "Granulado", "Pingo de Leite",
+        "Canudo de Biju", "Paçoca (Doce)", "Farofa de Paçoca", "Granulado Colorido", "Marshmallow",
+        "Confetti", "Bala de Goma Azeda", "Dentaduras (Fini)", "Amendoim com Chocolate", "Granola",
+        "Leite em Pó", "Bala Beijos (Fini)", "Bala Amoras (Fini)", "Sucrilhos", "Argolinhas Coloridas",
+        "Chocoball", "Calda de Morango", "Calda de Chocolate", "Calda de Caramelo", "Calda Fini (Tutti-Frutti/Uva)"
+      ];
+
+      let cart = [];
+      
+      cartIcon.addEventListener('click', () => cartSection.classList.add('show'));
+      closeCartBtn.addEventListener('click', () => cartSection.classList.remove('show'));
+      
+      checkoutBtn.addEventListener('click', function() {
+        if (cart.length === 0) {
+          alert('Seu carrinho está vazio. Adicione itens antes de finalizar o pedido.');
+          return;
+        }
+        checkoutForm.style.display = 'block';
+        cartItemsContainer.style.display = 'none'; 
+        document.querySelector('.cart-header').style.display = 'none';
+        document.querySelector('.cart-total').style.display = 'none';
+        this.style.display = 'none'; 
+      });
+      
+      backToCartBtn.addEventListener('click', function() {
+        checkoutForm.style.display = 'none';
+        cartItemsContainer.style.display = 'block';
+        document.querySelector('.cart-header').style.display = 'flex';
+        document.querySelector('.cart-total').style.display = 'flex';
+        checkoutBtn.style.display = 'flex'; 
+      });
+      
+      addToCartButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const itemElement = this.closest('.menu-item');
+          const itemName = itemElement.querySelector('.item-name').textContent;
+          const itemPrice = parseFloat(
+            itemElement.querySelector('.item-price').textContent
+              .replace('R$', '').replace(',', '.').trim()
+          );
+          
+          addItemToCart({ 
+            name: itemName, 
+            price: itemPrice, 
+            quantity: 1, 
+            id: itemName.toLowerCase().replace(/\s+/g, '-') + '-' + Date.now() 
+          }); 
+          
+          this.innerHTML = '<i class="fas fa-check"></i> Adicionado!';
+          this.style.backgroundColor = 'var(--accent-color)';
+          setTimeout(() => { 
+            this.innerHTML = '<i class="fas fa-plus"></i> Adicionar';
+            this.style.backgroundColor = 'var(--primary-color)';
+          }, 1500);
+        });
+      });
+
+      customizeItemButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          currentCustomizingItemDetails = {
+            id: this.dataset.itemId,
+            name: this.dataset.itemName,
+            price: parseFloat(this.dataset.itemPrice),
+            maxFlavors: parseInt(this.dataset.maxFlavors),
+            maxToppings: parseInt(this.dataset.maxToppings)
+          };
+          editingItemIndexInput.value = -1; 
+          confirmFlavorSelectionBtn.textContent = "Confirmar e Adicionar";
+          openFlavorSelectionModal(currentCustomizingItemDetails);
+        });
+      });
+
+      function openFlavorSelectionModal(itemData, existingSelections = { flavors: [], toppings: [] }) {
+        modalItemNameEl.textContent = `Personalize seu ${itemData.name}`;
+        maxFlavorsCountEl.textContent = itemData.maxFlavors;
+        maxToppingsCountEl.textContent = itemData.maxToppings;
+
+        populateOptions(flavorListEl, availableFlavors, 'flavor', itemData.maxFlavors, existingSelections.flavors);
+        populateOptions(toppingListEl, availableToppings, 'topping', itemData.maxToppings, existingSelections.toppings);
+        
+        checkSelectionLimit('flavor', itemData.maxFlavors);
+        checkSelectionLimit('topping', itemData.maxToppings);
+
+        flavorModal.style.display = 'block';
+      }
+
+      function populateOptions(listElement, optionsArray, type, maxSelection, preSelectedOptions = []) {
+        listElement.innerHTML = '';
+        optionsArray.forEach(option => {
+          const label = document.createElement('label');
+          const checkbox = document.createElement('input');
+          checkbox.type = 'checkbox';
+          checkbox.name = type;
+          checkbox.value = option;
+          if (preSelectedOptions.includes(option)) {
+            checkbox.checked = true;
+          }
+          checkbox.addEventListener('change', () => checkSelectionLimit(type, maxSelection));
+          label.appendChild(checkbox);
+          label.appendChild(document.createTextNode(option));
+          listElement.appendChild(label);
+        });
+      }
+      
+      function checkSelectionLimit(type, max) {
+        const checkedCount = flavorModal.querySelectorAll(`input[name="${type}"]:checked`).length;
+        const allCheckboxesOfType = flavorModal.querySelectorAll(`input[name="${type}"]`);
+        if (checkedCount >= max) {
+          allCheckboxesOfType.forEach(cb => {
+            if (!cb.checked) cb.disabled = true;
+          });
+        } else {
+          allCheckboxesOfType.forEach(cb => cb.disabled = false);
+        }
+      }
+
+      closeModalFlavorBtn.onclick = () => flavorModal.style.display = 'none';
+      window.onclick = function(event) {
+        if (event.target == flavorModal) {
+          flavorModal.style.display = 'none';
+        }
+      }
+
+      confirmFlavorSelectionBtn.onclick = function() {
+        const selectedFlavors = Array.from(flavorModal.querySelectorAll('input[name="flavor"]:checked')).map(cb => cb.value);
+        const selectedToppings = Array.from(flavorModal.querySelectorAll('input[name="topping"]:checked')).map(cb => cb.value);
+        const editingIndex = parseInt(editingItemIndexInput.value);
+
+        if (selectedFlavors.length === 0 && currentCustomizingItemDetails.maxFlavors > 0) {
+            alert(`Por favor, selecione pelo menos 1 sabor para o ${currentCustomizingItemDetails.name}.`);
+            return;
+        }
+        if (selectedFlavors.length > currentCustomizingItemDetails.maxFlavors) {
+            alert(`Você pode selecionar no máximo ${currentCustomizingItemDetails.maxFlavors} sabores.`);
+            return;
+        }
+         if (selectedToppings.length > currentCustomizingItemDetails.maxToppings) {
+            alert(`Você pode selecionar no máximo ${currentCustomizingItemDetails.maxToppings} acompanhamentos.`);
+            return;
+        }
+
+        const configuredItem = {
+            id: currentCustomizingItemDetails.id + '-' + Date.now(), 
+            name: currentCustomizingItemDetails.name,
+            price: currentCustomizingItemDetails.price,
+            quantity: 1, 
+            flavors: selectedFlavors,
+            toppings: selectedToppings,
+            isCustomizable: true 
+        };
+
+        if (editingIndex > -1) { 
+            configuredItem.quantity = cart[editingIndex].quantity;
+            cart[editingIndex] = configuredItem;
+        } else { 
+            addItemToCart(configuredItem);
+        }
+        
+        updateCart();
+        flavorModal.style.display = 'none';
+        editingItemIndexInput.value = -1; 
+      }
+
+      function addItemToCart(itemToAdd) {
+        const existingSimpleItemIndex = cart.findIndex(item => 
+            item.name === itemToAdd.name && 
+            !item.isCustomizable && 
+            !itemToAdd.isCustomizable 
+        );
+
+        if (existingSimpleItemIndex > -1) {
+             cart[existingSimpleItemIndex].quantity += itemToAdd.quantity;
+        } else {
+          cart.push(itemToAdd);
+        }
+        updateCart();
+      }
+      
+      function updateCart() {
+        cartItemsContainer.innerHTML = '';
+        
+        cart.forEach((item, index) => {
+          const cartItemElement = document.createElement('div');
+          cartItemElement.className = 'cart-item';
+          
+          let itemDetailsHTML = `<span class="cart-item-name">${item.name}</span>`;
+          if (item.isCustomizable) { 
+            if (item.flavors && item.flavors.length > 0) {
+              itemDetailsHTML += `<span class="cart-item-sub-details">Sabores: ${item.flavors.join(', ')}</span>`;
+            }
+            if (item.toppings && item.toppings.length > 0) {
+              itemDetailsHTML += `<span class="cart-item-sub-details">Acompanhamentos: ${item.toppings.join(', ')}</span>`;
+            }
+          }
+
+          let editButtonHTML = '';
+          if (item.isCustomizable) {
+            editButtonHTML = `<button class="edit-item" data-index="${index}" title="Editar item"><i class="fas fa-edit"></i></button>`;
+          }
+
+          cartItemElement.innerHTML = `
+            <div class="cart-item-details">${itemDetailsHTML}</div>
+            <div class="cart-item-price">R$ ${item.price.toFixed(2).replace('.', ',')}</div>
+            <div class="cart-item-actions">
+              ${editButtonHTML}
+              <button class="decrease-item" data-index="${index}" title="Diminuir"><i class="fas fa-minus"></i></button>
+              <span>${item.quantity}</span>
+              <button class="increase-item" data-index="${index}" title="Aumentar"><i class="fas fa-plus"></i></button>
+              <button class="remove-item" data-index="${index}" title="Remover"><i class="fas fa-trash"></i></button>
+            </div>
+          `;
+          
+          cartItemsContainer.appendChild(cartItemElement);
+        });
+        
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        
+        cartCount.textContent = totalItems;
+        totalAmount.textContent = `R$ ${totalPrice.toFixed(2).replace('.', ',')}`;
+        
+        cartItemsContainer.querySelectorAll('.decrease-item').forEach(button => {
+          button.addEventListener('click', function() {
+            const index = parseInt(this.getAttribute('data-index'));
+            if (cart[index].quantity > 1) {
+              cart[index].quantity -= 1;
+            } else {
+              cart.splice(index, 1); 
+            }
+            updateCart();
+          });
+        });
+        
+        cartItemsContainer.querySelectorAll('.increase-item').forEach(button => {
+          button.addEventListener('click', function() {
+            const index = parseInt(this.getAttribute('data-index'));
+            cart[index].quantity += 1;
+            updateCart();
+          });
+        });
+        
+        cartItemsContainer.querySelectorAll('.remove-item').forEach(button => {
+          button.addEventListener('click', function() {
+            const index = parseInt(this.getAttribute('data-index'));
+            cart.splice(index, 1);
+            updateCart();
+          });
+        });
+
+        cartItemsContainer.querySelectorAll('.edit-item').forEach(button => {
+          button.addEventListener('click', function() {
+            const index = parseInt(this.getAttribute('data-index'));
+            const itemToEdit = cart[index];
+            
+            const originalItemButton = document.querySelector(`.customize-item-btn[data-item-name="${itemToEdit.name}"]`);
+            if (!originalItemButton) {
+                console.error("Não foi possível encontrar o item original para edição:", itemToEdit.name);
+                alert("Erro ao tentar editar o item. Tente remover e adicionar novamente.");
+                return;
+            }
+
+            currentCustomizingItemDetails = {
+                id: originalItemButton.dataset.itemId,
+                name: itemToEdit.name, 
+                price: itemToEdit.price, 
+                maxFlavors: parseInt(originalItemButton.dataset.maxFlavors),
+                maxToppings: parseInt(originalItemButton.dataset.maxToppings)
+            };
+            
+            editingItemIndexInput.value = index; 
+            confirmFlavorSelectionBtn.textContent = "Confirmar Edição";
+            openFlavorSelectionModal(currentCustomizingItemDetails, { flavors: itemToEdit.flavors || [], toppings: itemToEdit.toppings || [] });
+          });
+        });
+      }
+      
+      categoryButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          categoryButtons.forEach(btn => btn.classList.remove('active'));
+          this.classList.add('active');
+          const selectedCategory = this.dataset.category;
+          filterMenuItems(selectedCategory, searchInput.value.toLowerCase());
+        });
+      });
+
+      searchInput.addEventListener('input', function() {
+          const selectedCategory = document.querySelector('.category-btn.active').dataset.category;
+          filterMenuItems(selectedCategory, this.value.toLowerCase());
+      });
+
+      function filterMenuItems(category, searchTerm) {
+          menuItems.forEach(item => {
+              const itemCategory = item.dataset.category;
+              const itemName = item.querySelector('.item-name').textContent.toLowerCase();
+              const itemDescription = item.querySelector('.item-description').textContent.toLowerCase();
+              const categoryMatch = (category === 'todos' || itemCategory === category);
+              const searchTermMatch = (itemName.includes(searchTerm) || itemDescription.includes(searchTerm) || searchTerm === '');
+              item.classList.toggle('hidden', !(categoryMatch && searchTermMatch));
+          });
+      }
+      
+      paymentOptions.forEach(option => {
+        option.addEventListener('change', function() {
+          cashGroup.style.display = (this.value === 'Dinheiro' ? 'block' : 'none');
+          if (this.value !== 'Dinheiro') {
+            cashAmount.value = '';
+            changeAmount.value = 'R$ 0,00';
+          }
+        });
+      });
+      
+      cashAmount.addEventListener('input', function() {
+        const totalPrice = parseFloat(totalAmount.textContent.replace('R$', '').replace(',', '.'));
+        const cashValue = parseFloat(this.value) || 0;
+        const change = cashValue - totalPrice;
+        changeAmount.value = (change >= 0) ? `R$ ${change.toFixed(2).replace('.', ',')}` : 'Valor insuficiente';
+      });
+      
+      sendOrderBtn.addEventListener('click', function() {
+        const name = document.getElementById('customer-name').value.trim();
+        const phone = document.getElementById('customer-phone').value.trim();
+        const address = document.getElementById('delivery-address').value.trim();
+        const notes = document.getElementById('order-notes').value.trim();
+        
+        const paymentMethodElement = document.querySelector('input[name="payment"]:checked');
+        if (!paymentMethodElement) {
+          alert('Por favor, selecione uma forma de pagamento.'); 
+          return; 
+        }
+        const paymentMethod = paymentMethodElement.value;
+        
+        if (!name) {
+          alert('Por favor, preencha o campo Nome.'); return;
+        }
+        if (!phone) { 
+            alert('Por favor, preencha o campo Telefone.'); return;
+        }
+        if (!address) {
+          alert('Por favor, preencha o campo Endereço.'); return;
+        }
+
+        if (paymentMethod === 'Dinheiro') {
+            const totalPrice = parseFloat(totalAmount.textContent.replace('R$', '').replace(',', '.'));
+            const cashValue = parseFloat(cashAmount.value) || 0;
+            if (!cashAmount.value || cashValue < totalPrice) {
+                alert('Para pagamento em dinheiro, insira um valor para troco que seja igual ou maior que o total do pedido.'); return;
+            }
+        }
+        
+        let message = `🍦 *NOVO PEDIDO - Sensação Sorveteria* %0A%0A`;
+        message += `*Cliente:* ${name}%0A*Telefone:* ${phone}%0A*Endereço:* ${address}%0A%0A`;
+        message += `*Itens do Pedido:*%0A`;
+        
+        cart.forEach(item => {
+          message += `• ${item.name} (${item.quantity}x) - R$ ${(item.price * item.quantity).toFixed(2).replace('.', ',')}%0A`;
+          if (item.isCustomizable) {
+            if (item.flavors && item.flavors.length > 0) {
+              message += `   Sabores: ${item.flavors.join(', ')}%0A`;
+            }
+            if (item.toppings && item.toppings.length > 0) {
+              message += `   Acompanhamentos: ${item.toppings.join(', ')}%0A`;
+            }
+          }
+        });
+        
+        message += `%0A*Total do Pedido:* ${totalAmount.textContent}%0A`;
+        message += `*Forma de Pagamento:* ${paymentMethod}%0A`;
+        
+        if (paymentMethod === 'Dinheiro') {
+          message += `*Valor em Dinheiro (para troco):* R$ ${parseFloat(cashAmount.value).toFixed(2).replace('.', ',')}%0A*Troco:* ${changeAmount.value}%0A`;
+        }
+        if (notes) {
+            message += `%0A*Observações:* ${notes}`;
+        }
+        message += `%0A%0A*Prazo de Entrega Estimado:* 30 minutos`; 
+        
+        const whatsappNumber = '5511999999999'; // !!! LEMBRE-SE DE ALTERAR PARA O NÚMERO CORRETO !!!
+        const finalURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+        console.log("URL do WhatsApp:", finalURL); // Para depuração
+        window.open(finalURL, '_blank');
+        
+        cart = []; updateCart();
+        checkoutForm.style.display = 'none';
+        cartItemsContainer.style.display = 'block';
+        document.querySelector('.cart-header').style.display = 'flex';
+        document.querySelector('.cart-total').style.display = 'flex';
+        checkoutBtn.style.display = 'flex';
+        cartSection.classList.remove('show');
+        ['customer-name', 'customer-phone', 'delivery-address', 'order-notes', 'cash-amount', 'change-amount'].forEach(id => document.getElementById(id).value = '');
+        document.getElementById('payment-pix').checked = true; 
+        cashGroup.style.display = 'none';
+      });
+
+      filterMenuItems('todos', ''); 
+      updateCart(); 
+    });
+  </script>
+</body>
+</html>
