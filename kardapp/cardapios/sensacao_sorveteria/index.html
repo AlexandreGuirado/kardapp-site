@@ -550,7 +550,7 @@
   <header>
     <div class="container"> 
       <div class="logo-container">
-        <img src="https://i.ibb.co/HTq6pqVS/sensa2.png" alt="Logo Sensação Sorveteria">
+        <img src="https://i.imgur.com/zR72G9D.png" alt="Logo Sensação Sorveteria">
       </div>
       <h1>Sensação Sorveteria</h1>
     </div>
@@ -1068,7 +1068,7 @@
         changeAmount.value = (change >= 0) ? `R$ ${change.toFixed(2).replace('.', ',')}` : 'Valor insuficiente';
       });
       
-sendOrderBtn.addEventListener('click', function() {
+      sendOrderBtn.addEventListener('click', function() {
         const name = document.getElementById('customer-name').value.trim();
         const phone = document.getElementById('customer-phone').value.trim();
         const address = document.getElementById('delivery-address').value.trim();
@@ -1081,7 +1081,6 @@ sendOrderBtn.addEventListener('click', function() {
         }
         const paymentMethod = paymentMethodElement.value;
         
-        // Validações de campos obrigatórios
         if (!name) { alert('Por favor, preencha o campo Nome.'); return; }
         if (!phone) { alert('Por favor, preencha o campo Telefone.'); return; }
         if (!address) { alert('Por favor, preencha o campo Endereço.'); return; }
@@ -1094,58 +1093,50 @@ sendOrderBtn.addEventListener('click', function() {
             }
         }
         
-        // Construção da Mensagem Otimizada para Legibilidade
-        let message = `🍦 *NOVO PEDIDO - Sensação Sorveteria* %0A`; // Título
-        message += `%0A`; // Linha em branco para espaçamento
-
-        message += `*Cliente:* ${name}%0A`;
-        message += `*Telefone:* ${phone}%0A`;
-        message += `*Endereço:* ${address}%0A`;
+        let message = `🍦 *NOVO PEDIDO - Sensação Sorveteria*\n\n`;
+        message += `*Cliente:* ${name}\n`;
+        message += `*Telefone:* ${phone}\n`;
+        message += `*Endereço:* ${address}\n`;
         
-        if (notes) { // Adiciona observações aqui se houver, antes dos itens
-            message += `*Observações:* ${notes}%0A`;
+        if (notes) {
+            message += `*Observações:* ${notes}\n`;
         }
-        message += `%0A`; // Linha em branco para espaçamento
+        message += `\n`; 
 
-        message += `*Itens do Pedido:*%0A`; 
+        message += `*Itens do Pedido:*\n`; 
         
         cart.forEach(item => {
           message += `- *${item.name}* (${item.quantity}x) - R$ ${(item.price * item.quantity).toFixed(2).replace('.', ',')}`;
           if (item.isCustomizable) {
             if (item.flavors && item.flavors.length > 0) {
-              message += `%0A  _Sabores: ${item.flavors.join(', ')}_`;
+              message += `\n  _Sabores: ${item.flavors.join(', ')}_`;
             }
             if (item.toppings && item.toppings.length > 0) {
-              message += `%0A  _Acompanhamentos: ${item.toppings.join(', ')}_`;
+              message += `\n  _Acompanhamentos: ${item.toppings.join(', ')}_`;
             }
           }
-          message += `%0A`; // Quebra de linha após cada item completo
+          message += `\n`; 
         });
         
-        // A linha em branco após o último item já é adicionada pelo loop
-        // message += `%0A`; // Linha em branco para espaçamento antes do total
-
-        message += `*Total do Pedido:* ${totalAmount.textContent}%0A`;
-        message += `*Forma de Pagamento:* ${paymentMethod}%0A`;
+        message += `\n*Total do Pedido:* ${totalAmount.textContent}\n`;
+        message += `*Forma de Pagamento:* ${paymentMethod}\n`;
         
         if (paymentMethod === 'Dinheiro') {
-          message += `*Valor Pago:* R$ ${parseFloat(cashAmount.value).toFixed(2).replace('.', ',')}%0A`; // Alterado para "Valor Pago"
-          message += `*Troco:* ${changeAmount.value}%0A`;
+          message += `*Valor Pago:* R$ ${parseFloat(cashAmount.value).toFixed(2).replace('.', ',')}\n`;
+          message += `*Troco:* ${changeAmount.value}\n`;
         }
         
-        message += `%0A`; // Linha em branco para espaçamento
+        message += `\n`;
         message += `*Prazo de Entrega Estimado:* 30 minutos`; 
         
-        const whatsappNumber = '5511965829000'; // SEU NÚMERO REAL AQUI
+        const whatsappNumber = '5511965829000'; // !!! SEU NÚMERO DE WHATSAPP AQUI !!!
         const finalURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
         
-        // Para depuração, você pode logar a mensagem antes e depois do encodeURIComponent
-        // console.log("Mensagem ANTES do encode:\n" + message.replace(/%0A/g, "\n"));
-        // console.log("URL do WhatsApp:", finalURL); 
+        // console.log("Mensagem formatada (antes do encode):\n" + message); // Para depuração
+        // console.log("URL Final:", finalURL); // Para depuração
         
         window.open(finalURL, '_blank');
         
-        // Limpar carrinho e formulário
         cart = []; updateCart();
         checkoutForm.style.display = 'none';
         cartItemsContainer.style.display = 'block';
