@@ -1100,37 +1100,48 @@
         }
         
         let message = `🍦 *NOVO PEDIDO - Sensação Sorveteria* %0A%0A`;
-        message += `*Cliente:* ${name}%0A*Telefone:* ${phone}%0A*Endereço:* ${address}%0A%0A`;
-        message += `*Itens do Pedido:*%0A`;
+        message += `*Cliente:* ${name}%0A`;
+        message += `*Telefone:* ${phone}%0A`;
+        message += `*Endereço:* ${address}%0A%0A`;
+        message += `*Itens do Pedido:*`; // Não precisa de %0A aqui, o loop adicionará
         
         cart.forEach(item => {
-          message += `• ${item.name} (${item.quantity}x) - R$ ${(item.price * item.quantity).toFixed(2).replace('.', ',')}%0A`;
+          // Quebra de linha ANTES de cada item da lista
+          message += `%0A- *${item.name}* (${item.quantity}x) - R$ ${(item.price * item.quantity).toFixed(2).replace('.', ',')}`;
           if (item.isCustomizable) {
             if (item.flavors && item.flavors.length > 0) {
-              message += `   Sabores: ${item.flavors.join(', ')}%0A`;
+              message += `%0A  _Sabores: ${item.flavors.join(', ')}_`;
             }
             if (item.toppings && item.toppings.length > 0) {
-              message += `   Acompanhamentos: ${item.toppings.join(', ')}%0A`;
+              message += `%0A  _Acompanhamentos: ${item.toppings.join(', ')}_`;
             }
           }
+          // Adiciona uma quebra de linha após os detalhes de um item, antes do próximo "- Item"
+          // ou antes da seção "Total do Pedido" se for o último item.
+          message += `%0A`; 
         });
         
+        // Removida a quebra de linha extra aqui, pois o loop já adiciona uma no final do último item.
+        // A próxima seção começa com %0A, então já haverá uma separação.
         message += `%0A*Total do Pedido:* ${totalAmount.textContent}%0A`;
         message += `*Forma de Pagamento:* ${paymentMethod}%0A`;
         
         if (paymentMethod === 'Dinheiro') {
-          message += `*Valor em Dinheiro (para troco):* R$ ${parseFloat(cashAmount.value).toFixed(2).replace('.', ',')}%0A*Troco:* ${changeAmount.value}%0A`;
+          message += `*Valor em Dinheiro (para troco):* R$ ${parseFloat(cashAmount.value).toFixed(2).replace('.', ',')}%0A`;
+          message += `*Troco:* ${changeAmount.value}%0A`;
         }
         if (notes) {
             message += `%0A*Observações:* ${notes}`;
         }
         message += `%0A%0A*Prazo de Entrega Estimado:* 30 minutos`; 
         
-        const whatsappNumber = '5511965829000'; // !!! LEMBRE-SE DE ALTERAR PARA O NÚMERO CORRETO !!!
+        const whatsappNumber = '5511965829000'; // SEU NÚMERO REAL AQUI
         const finalURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-        console.log("URL do WhatsApp:", finalURL); // Para depuração
+        console.log("URL do WhatsApp para depuração:", finalURL); 
+        console.log("Mensagem decodificada para depuração:\n", decodeURIComponent(message.replace(/%0A/g, '\n'))); // Mostra como a mensagem deve aparecer
         window.open(finalURL, '_blank');
         
+        // ... resto da função para limpar o carrinho etc. ...
         cart = []; updateCart();
         checkoutForm.style.display = 'none';
         cartItemsContainer.style.display = 'block';
