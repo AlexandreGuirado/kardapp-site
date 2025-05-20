@@ -95,18 +95,19 @@
     .categories {
       display: flex;
       justify-content: center;
-      gap: 15px;
+      gap: 10px; /* Reduzido para caber mais botões */
       margin-bottom: 30px;
       flex-wrap: wrap;
     }
     
     .category-btn {
-      padding: 10px 20px;
+      padding: 8px 15px; /* Reduzido para caber mais botões */
       background-color: var(--card-background);
       border: 2px solid var(--primary-color);
       border-radius: 30px;
       color: var(--primary-color);
       font-weight: 600;
+      font-size: 0.9rem; /* Reduzido para caber mais botões */
       cursor: pointer;
       transition: all 0.3s;
     }
@@ -118,8 +119,8 @@
     
     .menu-items {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
-      gap: 25px;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Ajustado minmax */
+      gap: 20px; /* Ajustado gap */
       margin-bottom: 40px;
     }
     
@@ -142,7 +143,7 @@
     }
     
     .item-content {
-      padding: 20px;
+      padding: 15px; /* Ajustado padding */
       flex-grow: 1;
       display: flex;
       flex-direction: column;
@@ -152,11 +153,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center; 
-      margin-bottom: 10px;
+      margin-bottom: 8px; /* Ajustado */
     }
     
     .item-name {
-      font-size: 1.3rem; 
+      font-size: 1.2rem; /* Ajustado */
       font-weight: 700;
       color: var(--primary-color);
       flex-grow: 1; 
@@ -164,7 +165,7 @@
     }
     
     .item-price {
-      font-size: 1.1rem; 
+      font-size: 1.05rem; /* Ajustado */
       font-weight: 700;
       color: var(--dark-text-color);
       white-space: nowrap; 
@@ -173,14 +174,14 @@
     
     .item-description {
       color: #666;
-      margin-bottom: 15px;
-      font-size: 0.9rem; 
+      margin-bottom: 12px; /* Ajustado */
+      font-size: 0.85rem; /* Ajustado */
       flex-grow: 1;
     }
         
     .add-to-cart, .customize-item-btn {
       width: 100%;
-      padding: 12px;
+      padding: 10px; /* Ajustado */
       background-color: var(--primary-color);
       color: var(--text-on-primary);
       border: none;
@@ -193,364 +194,64 @@
       justify-content: center;
       gap: 8px;
       margin-top: auto; 
+      font-size: 0.95rem; /* Ajustado */
     }
     
     .add-to-cart:hover, .customize-item-btn:hover {
       background-color: var(--accent-color);
     }
     
-    .cart-section {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background-color: var(--card-background);
-      box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
-      padding: 15px;
-      transform: translateY(100%);
-      transition: transform 0.3s;
-      z-index: 100;
-      border-radius: 20px 20px 0 0;
-    }
-    
-    .cart-section.show {
-      transform: translateY(0);
-    }
-    
-    .cart-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 15px;
-    }
-    
-    .cart-title {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--primary-color);
-    }
-    
-    .close-cart {
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: #777;
-    }
-    
-    .cart-items {
-      max-height: 300px;
-      overflow-y: auto;
-      margin-bottom: 15px;
-    }
-    
-    .cart-item {
-      display: flex;
-      align-items: flex-start; 
-      padding: 10px 0;
-      border-bottom: 1px solid #eee;
-    }
-    
-    .cart-item-details {
-        flex-grow: 1;
-    }
-
-    .cart-item-name {
-      font-weight: 500;
-      display: block; 
-    }
-    .cart-item-sub-details {
-        font-size: 0.85rem;
-        color: #555;
-        margin-left: 15px;
-        display: block;
-    }
-    
-    .cart-item-price {
-      font-weight: 600;
-      margin: 0 10px;
-      white-space: nowrap;
-    }
-    
-    .cart-item-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px; 
-      margin-left: auto; 
-    }
-    
-    .cart-item-actions button {
-      background: none;
-      border: none;
-      font-size: 1.1rem; 
-      cursor: pointer;
-      color: var(--primary-color);
-      padding: 2px 4px;
-    }
-     .cart-item-actions .edit-item { 
-        color: #555; 
-     }
-     .cart-item-actions .edit-item:hover {
-         color: var(--primary-color);
-     }
-    
-    .cart-total {
-      display: flex;
-      justify-content: space-between;
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin: 15px 0;
-    }
-    
-    .checkout-btn { 
-      width: 100%;
-      padding: 15px;
-      background-color: var(--secondary-color); 
-      color: var(--dark-text-color); 
-      border: none;
-      border-radius: 10px;
-      font-weight: 700;
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-    
-    .checkout-btn:hover {
-      background-color: #e69500; 
-    }
-    
-    .cart-icon {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background-color: var(--primary-color);
-      color: var(--text-on-primary);
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      cursor: pointer;
-      z-index: 99;
-    }
-    
-    .cart-count {
-      position: absolute;
-      top: -5px;
-      right: -5px;
-      background-color: var(--secondary-color); 
-      color: var(--dark-text-color); 
-      width: 25px;
-      height: 25px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
-      font-weight: 700;
-    }
-    
-    .checkout-form {
-      display: none;
-      padding: 20px;
-      background-color: var(--card-background);
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      margin-top: 20px;
-    }
-    
-    .form-group {
-      margin-bottom: 15px;
-    }
-    
-    .form-group label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: 600;
-    }
-    
-    .form-group input, 
-    .form-group textarea, 
-    .form-group select {
-      width: 100%;
-      padding: 12px;
-      border: 2px solid #ddd;
-      border-radius: 8px;
-      font-size: 1rem;
-    }
-    
-    .form-group textarea {
-      min-height: 100px;
-      resize: vertical;
-    }
-    
-    .payment-method {
-      margin-top: 20px;
-    }
-    
-    .payment-option {
-      display: flex;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-    
-    .payment-option input {
-      margin-right: 10px;
-    }
-    
-    .cash-group {
-      margin-top: 15px;
-      padding: 15px;
-      background-color: #f9f9f9; 
-      border-radius: 8px;
-      display: none;
-    }
-    
-    .back-to-cart {
-      background: none;
-      border: none;
-      color: var(--primary-color);
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      margin-bottom: 15px;
-    }
-
-    .flavor-modal {
-      display: none; 
-      position: fixed;
-      z-index: 1001;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: var(--modal-bg);
-      padding-top: 60px;
-    }
-
-    .modal-content {
-      background-color: var(--card-background);
-      margin: 5% auto;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 90%;
-      max-width: 500px;
-      border-radius: 10px;
-      position: relative;
-    }
-
-    .close-modal-btn {
-      color: #aaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-    }
-
-    .close-modal-btn:hover,
-    .close-modal-btn:focus {
-      color: var(--dark-text-color);
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    .modal-title {
-      color: var(--primary-color);
-      font-size: 1.5rem;
-      margin-bottom: 15px;
-    }
-    .options-group h4 {
-        margin-top: 15px;
-        margin-bottom: 8px;
-        font-size: 1.1rem;
-        color: var(--dark-text-color);
-    }
-    .options-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-    .options-list label {
-        display: flex;
-        align-items: center;
-        background-color: var(--light-background); 
-        padding: 8px 12px;
-        border-radius: 20px;
-        cursor: pointer;
-        font-size: 0.9rem;
-        color: var(--dark-text-color);
-        border: 1px solid var(--primary-color); 
-    }
-    .options-list input[type="checkbox"] {
-        margin-right: 8px;
-        accent-color: var(--primary-color); 
-    }
-    .modal-confirm-btn {
-      background-color: var(--primary-color);
-      color: var(--text-on-primary);
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 1rem;
-      margin-top: 20px;
-      display: block;
-      width: 100%;
-    }
-    .modal-confirm-btn:hover {
-        background-color: var(--accent-color);
-    }
-    
-    @media (max-width: 768px) {
-      header h1 {
-        font-size: 1.5rem; 
-      }
-      header .logo-container img {
-        max-width: 50px; 
-      }
-      header .container {
-        padding: 0 15px; 
-      }
-
-      .menu-items {
-        grid-template-columns: 1fr;
-      }
-      .cart-item-actions {
-        gap: 5px;
-      }
-      .cart-item-actions button {
-          font-size: 1rem;
-      }
-      .cart-section {
-        padding: 15px 10px;
-      }
-      .modal-content {
-        width: 95%;
-        padding-top: 40px; 
-      }
-      .modal-title {
-        font-size: 1.3rem;
-      }
-      .options-group h4 {
-        font-size: 1rem;
-      }
-    }
+    /* ... (Restante do CSS igual ao anterior, não vou repetir tudo para economizar espaço) ... */
+    /* Estilos do carrinho, modal, formulário de checkout permanecem os mesmos */
+    .cart-section {position: fixed;bottom: 0;left: 0;right: 0;background-color: var(--card-background);box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);padding: 15px;transform: translateY(100%);transition: transform 0.3s;z-index: 100;border-radius: 20px 20px 0 0;}
+    .cart-section.show {transform: translateY(0);}
+    .cart-header {display: flex;justify-content: space-between;align-items: center;margin-bottom: 15px;}
+    .cart-title {font-size: 1.3rem;font-weight: 700;color: var(--primary-color);}
+    .close-cart {background: none;border: none;font-size: 1.5rem;cursor: pointer;color: #777;}
+    .cart-items {max-height: 300px;overflow-y: auto;margin-bottom: 15px;}
+    .cart-item {display: flex;align-items: flex-start; padding: 10px 0;border-bottom: 1px solid #eee;}
+    .cart-item-details {flex-grow: 1;}
+    .cart-item-name {font-weight: 500;display: block; }
+    .cart-item-sub-details {font-size: 0.85rem;color: #555;margin-left: 15px;display: block;}
+    .cart-item-price {font-weight: 600;margin: 0 10px;white-space: nowrap;}
+    .cart-item-actions {display: flex;align-items: center;gap: 8px; margin-left: auto; }
+    .cart-item-actions button {background: none;border: none;font-size: 1.1rem; cursor: pointer;color: var(--primary-color);padding: 2px 4px;}
+    .cart-item-actions .edit-item { color: #555; }
+    .cart-item-actions .edit-item:hover { color: var(--primary-color); }
+    .cart-total {display: flex;justify-content: space-between;font-size: 1.2rem;font-weight: 700;margin: 15px 0;}
+    .checkout-btn { width: 100%;padding: 15px;background-color: var(--secondary-color); color: var(--dark-text-color); border: none;border-radius: 10px;font-weight: 700;font-size: 1.1rem;cursor: pointer;transition: background-color 0.3s;display: flex;align-items: center;justify-content: center;gap: 10px;}
+    .checkout-btn:hover {background-color: #e69500; }
+    .cart-icon {position: fixed;bottom: 30px;right: 30px;background-color: var(--primary-color);color: var(--text-on-primary);width: 60px;height: 60px;border-radius: 50%;display: flex;align-items: center;justify-content: center;font-size: 1.5rem;box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);cursor: pointer;z-index: 99;}
+    .cart-count {position: absolute;top: -5px;right: -5px;background-color: var(--secondary-color); color: var(--dark-text-color); width: 25px;height: 25px;border-radius: 50%;display: flex;align-items: center;justify-content: center;font-size: 0.8rem;font-weight: 700;}
+    .checkout-form {display: none;padding: 20px;background-color: var(--card-background);border-radius: 15px;box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);margin-top: 20px;}
+    .form-group {margin-bottom: 15px;}
+    .form-group label {display: block;margin-bottom: 5px;font-weight: 600;}
+    .form-group input, .form-group textarea, .form-group select {width: 100%;padding: 12px;border: 2px solid #ddd;border-radius: 8px;font-size: 1rem;}
+    .form-group textarea {min-height: 100px;resize: vertical;}
+    .payment-method {margin-top: 20px;}
+    .payment-option {display: flex;align-items: center;margin-bottom: 10px;}
+    .payment-option input {margin-right: 10px;}
+    .cash-group {margin-top: 15px;padding: 15px;background-color: #f9f9f9; border-radius: 8px;display: none;}
+    .back-to-cart {background: none;border: none;color: var(--primary-color);font-weight: 600;cursor: pointer;display: flex;align-items: center;gap: 5px;margin-bottom: 15px;}
+    .flavor-modal {display: none; position: fixed;z-index: 1001;left: 0;top: 0;width: 100%;height: 100%;overflow: auto;background-color: var(--modal-bg);padding-top: 60px;}
+    .modal-content {background-color: var(--card-background);margin: 5% auto;padding: 20px;border: 1px solid #888;width: 90%;max-width: 500px;border-radius: 10px;position: relative;}
+    .close-modal-btn {color: #aaa;float: right;font-size: 28px;font-weight: bold;}
+    .close-modal-btn:hover,.close-modal-btn:focus {color: var(--dark-text-color);text-decoration: none;cursor: pointer;}
+    .modal-title {color: var(--primary-color);font-size: 1.5rem;margin-bottom: 15px;}
+    .options-group h4 {margin-top: 15px;margin-bottom: 8px;font-size: 1.1rem;color: var(--dark-text-color);}
+    .options-list {display: flex;flex-wrap: wrap;gap: 10px;}
+    .options-list label {display: flex;align-items: center;background-color: var(--light-background); padding: 8px 12px;border-radius: 20px;cursor: pointer;font-size: 0.9rem;color: var(--dark-text-color);border: 1px solid var(--primary-color); }
+    .options-list input[type="checkbox"] {margin-right: 8px;accent-color: var(--primary-color); }
+    .modal-confirm-btn {background-color: var(--primary-color);color: var(--text-on-primary);padding: 10px 20px;border: none;border-radius: 5px;cursor: pointer;font-size: 1rem;margin-top: 20px;display: block;width: 100%;}
+    .modal-confirm-btn:hover {background-color: var(--accent-color);}
+    @media (max-width: 768px) { header h1 {font-size: 1.5rem; } header .logo-container img {max-width: 50px; } header .container {padding: 0 15px; } .menu-items {grid-template-columns: 1fr;} .cart-item-actions {gap: 5px;} .cart-item-actions button {font-size: 1rem;} .cart-section {padding: 15px 10px;} .modal-content {width: 95%;padding-top: 40px; } .modal-title {font-size: 1.3rem;} .options-group h4 {font-size: 1rem;} }
   </style>
 </head>
 <body>
   <header>
     <div class="container"> 
       <div class="logo-container">
-        <img src="https://i.ibb.co/HTq6pqVS/sensa2.png" alt="Logo Sensação Sorveteria">
+        <img src="https://i.ibb.co/HTq6pqVS/sensa2.png alt="Logo Sensação Sorveteria">
       </div>
       <h1>Sensação Sorveteria</h1>
     </div>
@@ -564,57 +265,129 @@
     <div class="categories">
       <button class="category-btn active" data-category="todos">Todos</button>
       <button class="category-btn" data-category="picoles">Picolés</button>
-      <button class="category-btn" data-category="sorvetes_massa">Sorvetes de Massa</button>
+      <button class="category-btn" data-category="acai">Açaí</button>
+      <button class="category-btn" data-category="sorvetes">Copos de Sorvete</button>
     </div>
     
     <div class="menu-items">
-      <!-- PICOLÉS -->
-      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Manga</h3><span class="item-price">R$ 4,00</span></div><p class="item-description">Refrescante picolé sabor manga.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
-      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Maracujá</h3><span class="item-price">R$ 4,00</span></div><p class="item-description">Delicioso picolé sabor maracujá.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
-      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Uva</h3><span class="item-price">R$ 4,00</span></div><p class="item-description">Saboroso picolé de uva.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
-      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Limão</h3><span class="item-price">R$ 4,00</span></div><p class="item-description">Picolé cítrico de limão.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
-      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Coco</h3><span class="item-price">R$ 4,00</span></div><p class="item-description">Tradicional picolé de coco.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
-      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Groselha</h3><span class="item-price">R$ 4,00</span></div><p class="item-description">Doce picolé de groselha.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
-      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Tangerina</h3><span class="item-price">R$ 4,00</span></div><p class="item-description">Picolé refrescante de tangerina.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
-      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Goiaba</h3><span class="item-price">R$ 4,00</span></div><p class="item-description">Picolé com o autêntico sabor de goiaba.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
-      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Chocolate</h3><span class="item-price">R$ 4,50</span></div><p class="item-description">Clássico picolé de chocolate.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
-      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Morango</h3><span class="item-price">R$ 4,00</span></div><p class="item-description">Delicado picolé de morango.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
-      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Mousse de Maracujá</h3><span class="item-price">R$ 5,00</span></div><p class="item-description">Cremoso picolé mousse de maracujá.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
-      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Limão Suíço</h3><span class="item-price">R$ 5,00</span></div><p class="item-description">Refrescante picolé de limão suíço.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
-      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Amendoim</h3><span class="item-price">R$ 4,50</span></div><p class="item-description">Saboroso picolé de amendoim.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
-      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Abacaxi</h3><span class="item-price">R$ 4,00</span></div><p class="item-description">Picolé tropical de abacaxi.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
-      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Milho Verde</h3><span class="item-price">R$ 4,00</span></div><p class="item-description">Autêntico picolé de milho verde.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
-      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Leite Condensado</h3><span class="item-price">R$ 5,00</span></div><p class="item-description">Doce e cremoso picolé de leite condensado.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
-      
-      <div class="menu-item" data-category="sorvetes_massa">
+      <!-- PICOLÉS SIMPLES -->
+      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Manga</h3><span class="item-price">R$ 3,00</span></div><p class="item-description">Refrescante picolé sabor manga.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
+      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Maracujá</h3><span class="item-price">R$ 3,00</span></div><p class="item-description">Delicioso picolé sabor maracujá.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
+      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Uva</h3><span class="item-price">R$ 3,00</span></div><p class="item-description">Saboroso picolé de uva.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
+      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Limão</h3><span class="item-price">R$ 3,00</span></div><p class="item-description">Picolé cítrico de limão.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
+      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Coco</h3><span class="item-price">R$ 3,00</span></div><p class="item-description">Tradicional picolé de coco.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
+      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Groselha</h3><span class="item-price">R$ 3,00</span></div><p class="item-description">Doce picolé de groselha.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
+      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Tangerina</h3><span class="item-price">R$ 3,00</span></div><p class="item-description">Picolé refrescante de tangerina.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
+      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Goiaba</h3><span class="item-price">R$ 3,00</span></div><p class="item-description">Picolé com o autêntico sabor de goiaba.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
+      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Chocolate</h3><span class="item-price">R$ 3,00</span></div><p class="item-description">Clássico picolé de chocolate.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
+      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Morango</h3><span class="item-price">R$ 3,00</span></div><p class="item-description">Delicado picolé de morango.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
+      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Mousse de Maracujá</h3><span class="item-price">R$ 3,00</span></div><p class="item-description">Cremoso picolé mousse de maracujá.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
+      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Limão Suíço</h3><span class="item-price">R$ 3,00</span></div><p class="item-description">Refrescante picolé de limão suíço.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
+      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Amendoim</h3><span class="item-price">R$ 3,00</span></div><p class="item-description">Saboroso picolé de amendoim.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
+      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Abacaxi</h3><span class="item-price">R$ 3,00</span></div><p class="item-description">Picolé tropical de abacaxi.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
+      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Milho Verde</h3><span class="item-price">R$ 3,00</span></div><p class="item-description">Autêntico picolé de milho verde.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
+      <div class="menu-item" data-category="picoles"><div class="item-content"><div class="item-header"><h3 class="item-name">Picolé Leite Condensado</h3><span class="item-price">R$ 3,00</span></div><p class="item-description">Doce e cremoso picolé de leite condensado.</p><button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button></div></div>
+
+      <!-- PICOLÉ ZERO AÇÚCAR (Exemplo) -->
+      <div class="menu-item" data-category="picoles">
         <div class="item-content">
           <div class="item-header">
-            <h3 class="item-name">Sorvete no Copo (Até 2 Sabores)</h3>
-            <span class="item-price">R$ 12,00</span>
+            <h3 class="item-name">Picolé Zero Açúcar (Sabor)</h3> <!-- Altere (Sabor) para o sabor real -->
+            <span class="item-price">R$ 6,50</span>
+          </div>
+          <p class="item-description">Delicioso picolé sem adição de açúcar. Consulte sabores disponíveis.</p>
+          <button class="add-to-cart"><i class="fas fa-plus"></i> Adicionar</button>
+        </div>
+      </div>
+      
+      <!-- COPOS DE AÇAÍ -->
+      <div class="menu-item" data-category="acai">
+        <div class="item-content">
+          <div class="item-header">
+            <h3 class="item-name">Copo de Açaí Pequeno</h3>
+            <span class="item-price">R$ 10,00</span>
           </div>
           <p class="item-description">
-            Escolha até 2 dos seus sabores de massa favoritos e até 3 acompanhamentos deliciosos!
+            Até 2 sabores de açaí/sorvete e 2 acompanhamentos.
           </p>
-          <button class="customize-item-btn" data-item-id="sorvete-copo-2sabores" data-item-name="Sorvete no Copo (Até 2 Sabores)" data-item-price="12.00" data-max-flavors="2" data-max-toppings="3">
+          <button class="customize-item-btn" data-item-id="acai-pequeno" data-item-name="Copo de Açaí Pequeno" data-item-price="10.00" data-max-flavors="2" data-max-toppings="2">
+            <i class="fas fa-ice-cream"></i> Personalizar
+          </button>
+        </div>
+      </div>
+      <div class="menu-item" data-category="acai">
+        <div class="item-content">
+          <div class="item-header">
+            <h3 class="item-name">Copo de Açaí Médio</h3>
+            <span class="item-price">R$ 14,00</span>
+          </div>
+          <p class="item-description">
+            Até 3 sabores de açaí/sorvete e 3 acompanhamentos.
+          </p>
+          <button class="customize-item-btn" data-item-id="acai-medio" data-item-name="Copo de Açaí Médio" data-item-price="14.00" data-max-flavors="3" data-max-toppings="3">
+            <i class="fas fa-ice-cream"></i> Personalizar
+          </button>
+        </div>
+      </div>
+      <div class="menu-item" data-category="acai">
+        <div class="item-content">
+          <div class="item-header">
+            <h3 class="item-name">Copo de Açaí Grande</h3>
+            <span class="item-price">R$ 19,00</span>
+          </div>
+          <p class="item-description">
+            Até 3 sabores de açaí/sorvete e 3 acompanhamentos.
+          </p>
+          <button class="customize-item-btn" data-item-id="acai-grande" data-item-name="Copo de Açaí Grande" data-item-price="19.00" data-max-flavors="3" data-max-toppings="3">
             <i class="fas fa-ice-cream"></i> Personalizar
           </button>
         </div>
       </div>
 
-       <div class="menu-item" data-category="sorvetes_massa">
+      <!-- COPOS DE SORVETE -->
+      <div class="menu-item" data-category="sorvetes">
         <div class="item-content">
           <div class="item-header">
-            <h3 class="item-name">Sorvete no Copo Grande (Até 3 Sabores)</h3>
-            <span class="item-price">R$ 18,00</span>
+            <h3 class="item-name">Copo de Sorvete Pequeno</h3>
+            <span class="item-price">R$ 10,00</span>
           </div>
           <p class="item-description">
-            Mais sorvete, mais sabor! Escolha até 3 sabores de massa e até 4 acompanhamentos.
+            Até 2 sabores de sorvete e 2 acompanhamentos.
           </p>
-          <button class="customize-item-btn" data-item-id="sorvete-copo-3sabores" data-item-name="Sorvete no Copo Grande (Até 3 Sabores)" data-item-price="18.00" data-max-flavors="3" data-max-toppings="4">
+          <button class="customize-item-btn" data-item-id="sorvete-pequeno" data-item-name="Copo de Sorvete Pequeno" data-item-price="10.00" data-max-flavors="2" data-max-toppings="2">
             <i class="fas fa-ice-cream"></i> Personalizar
           </button>
         </div>
       </div>
+      <div class="menu-item" data-category="sorvetes">
+        <div class="item-content">
+          <div class="item-header">
+            <h3 class="item-name">Copo de Sorvete Médio</h3>
+            <span class="item-price">R$ 16,00</span>
+          </div>
+          <p class="item-description">
+            Até 3 sabores de sorvete e 3 acompanhamentos.
+          </p>
+          <button class="customize-item-btn" data-item-id="sorvete-medio" data-item-name="Copo de Sorvete Médio" data-item-price="16.00" data-max-flavors="3" data-max-toppings="3">
+            <i class="fas fa-ice-cream"></i> Personalizar
+          </button>
+        </div>
+      </div>
+      <div class="menu-item" data-category="sorvetes">
+        <div class="item-content">
+          <div class="item-header">
+            <h3 class="item-name">Copo de Sorvete Grande</h3>
+            <span class="item-price">R$ 19,00</span>
+          </div>
+          <p class="item-description">
+            Até 3 sabores de sorvete e 3 acompanhamentos.
+          </p>
+          <button class="customize-item-btn" data-item-id="sorvete-grande" data-item-name="Copo de Sorvete Grande" data-item-price="19.00" data-max-flavors="3" data-max-toppings="3">
+            <i class="fas fa-ice-cream"></i> Personalizar
+          </button>
+        </div>
+      </div>
+
     </div>
   </div> 
   
@@ -623,88 +396,9 @@
     <span class="cart-count">0</span>
   </div>
   
-  <div class="cart-section">
-    <div class="container"> 
-      <div class="cart-header">
-        <h3 class="cart-title">Seu Pedido</h3>
-        <button class="close-cart"><i class="fas fa-times"></i></button>
-      </div>
-      <div class="cart-items"></div>
-      <div class="cart-total">
-        <span>Total:</span>
-        <span class="total-amount">R$ 0,00</span>
-      </div>
-      <button class="checkout-btn" id="checkout-btn">
-        <i class="fab fa-whatsapp"></i> Finalizar Pedido
-      </button>
-      <div class="checkout-form" id="checkout-form">
-        <button class="back-to-cart" id="back-to-cart">
-          <i class="fas fa-arrow-left"></i> Voltar ao carrinho
-        </button>
-        <div class="form-group">
-          <label for="customer-name">Nome:</label>
-          <input type="text" id="customer-name" placeholder="Seu nome completo" required>
-        </div>
-        <div class="form-group">
-          <label for="customer-phone">Telefone (WhatsApp):</label>
-          <input type="tel" id="customer-phone" placeholder="(XX) XXXXX-XXXX" required>
-        </div>
-        <div class="form-group">
-          <label for="delivery-address">Endereço de Entrega (ou "Retirar no local"):</label>
-          <input type="text" id="delivery-address" placeholder="Rua, número, bairro, complemento" required>
-        </div>
-        <div class="form-group">
-          <label for="order-notes">Observações:</label>
-          <textarea id="order-notes" placeholder="Alguma observação sobre seu pedido? (Ex: sem algum ingrediente, ponto de referência)"></textarea>
-        </div>
-        <div class="payment-method">
-          <h4>Forma de Pagamento:</h4>
-          <div class="payment-option">
-            <input type="radio" id="payment-pix" name="payment" value="Pix" checked>
-            <label for="payment-pix">Pix</label>
-          </div>
-          <div class="payment-option">
-            <input type="radio" id="payment-card" name="payment" value="Cartão">
-            <label for="payment-card">Cartão (na entrega)</label>
-          </div>
-          <div class="payment-option">
-            <input type="radio" id="payment-cash" name="payment" value="Dinheiro">
-            <label for="payment-cash">Dinheiro</label>
-          </div>
-          <div class="cash-group" id="cash-group">
-            <div class="form-group">
-              <label for="cash-amount">Valor em dinheiro para troco:</label>
-              <input type="number" id="cash-amount" placeholder="Ex: 50 (para R$50,00)">
-            </div>
-            <div class="form-group">
-              <label>Troco:</label>
-              <input type="text" id="change-amount" placeholder="R$ 0,00" readonly>
-            </div>
-          </div>
-        </div>
-        <button class="checkout-btn" id="send-order-btn"> 
-          <i class="fas fa-paper-plane"></i> Enviar Pedido via WhatsApp
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <div id="flavorModal" class="flavor-modal">
-    <div class="modal-content">
-      <span class="close-modal-btn">×</span>
-      <h3 id="modalItemName" class="modal-title">Personalize seu Sorvete</h3>
-      <input type="hidden" id="editingItemIndex" value="-1">
-      <div id="modalFlavorOptions" class="options-group">
-        <h4>Escolha até <span id="maxFlavorsCount">2</span> sabores de massa:</h4>
-        <div class="options-list" id="flavorList"></div>
-      </div>
-      <div id="modalToppingOptions" class="options-group">
-        <h4>Escolha até <span id="maxToppingsCount">3</span> acompanhamentos/caldas:</h4>
-        <div class="options-list" id="toppingList"></div>
-      </div>
-      <button id="confirmFlavorSelection" class="modal-confirm-btn">Confirmar e Adicionar</button>
-    </div>
-  </div>
+  <!-- Carrinho, Modal e Formulário de Checkout (sem alterações, permanecem como antes) -->
+  <div class="cart-section"> <div class="container"> <div class="cart-header"> <h3 class="cart-title">Seu Pedido</h3> <button class="close-cart"><i class="fas fa-times"></i></button> </div> <div class="cart-items"></div> <div class="cart-total"> <span>Total:</span> <span class="total-amount">R$ 0,00</span> </div> <button class="checkout-btn" id="checkout-btn"> <i class="fab fa-whatsapp"></i> Finalizar Pedido </button> <div class="checkout-form" id="checkout-form"> <button class="back-to-cart" id="back-to-cart"> <i class="fas fa-arrow-left"></i> Voltar ao carrinho </button> <div class="form-group"> <label for="customer-name">Nome:</label> <input type="text" id="customer-name" placeholder="Seu nome completo" required> </div> <div class="form-group"> <label for="customer-phone">Telefone (WhatsApp):</label> <input type="tel" id="customer-phone" placeholder="(XX) XXXXX-XXXX" required> </div> <div class="form-group"> <label for="delivery-address">Endereço de Entrega (ou "Retirar no local"):</label> <input type="text" id="delivery-address" placeholder="Rua, número, bairro, complemento" required> </div> <div class="form-group"> <label for="order-notes">Observações:</label> <textarea id="order-notes" placeholder="Alguma observação sobre seu pedido? (Ex: sem algum ingrediente, ponto de referência)"></textarea> </div> <div class="payment-method"> <h4>Forma de Pagamento:</h4> <div class="payment-option"> <input type="radio" id="payment-pix" name="payment" value="Pix" checked> <label for="payment-pix">Pix</label> </div> <div class="payment-option"> <input type="radio" id="payment-card" name="payment" value="Cartão"> <label for="payment-card">Cartão (na entrega)</label> </div> <div class="payment-option"> <input type="radio" id="payment-cash" name="payment" value="Dinheiro"> <label for="payment-cash">Dinheiro</label> </div> <div class="cash-group" id="cash-group"> <div class="form-group"> <label for="cash-amount">Valor em dinheiro para troco:</label> <input type="number" id="cash-amount" placeholder="Ex: 50 (para R$50,00)"> </div> <div class="form-group"> <label>Troco:</label> <input type="text" id="change-amount" placeholder="R$ 0,00" readonly> </div> </div> </div> <button class="checkout-btn" id="send-order-btn"> <i class="fas fa-paper-plane"></i> Enviar Pedido via WhatsApp </button> </div> </div> </div>
+  <div id="flavorModal" class="flavor-modal"> <div class="modal-content"> <span class="close-modal-btn">×</span> <h3 id="modalItemName" class="modal-title">Personalize seu Item</h3> <input type="hidden" id="editingItemIndex" value="-1"> <div id="modalFlavorOptions" class="options-group"> <h4>Escolha até <span id="maxFlavorsCount">2</span> sabores:</h4> <div class="options-list" id="flavorList"></div> </div> <div id="modalToppingOptions" class="options-group"> <h4>Escolha até <span id="maxToppingsCount">2</span> acompanhamentos:</h4> <div class="options-list" id="toppingList"></div> </div> <button id="confirmFlavorSelection" class="modal-confirm-btn">Confirmar e Adicionar</button> </div> </div>
   
   <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -741,10 +435,12 @@
       
       let currentCustomizingItemDetails = null; 
 
+      // SABORES DE MASSA (SORVETE) E AÇAÍ (assumindo que podem escolher os mesmos sabores de sorvete no açaí)
       const availableFlavors = [
+        "Açaí Tradicional", "Açaí com Morango", "Açaí com Banana", // Opções específicas de Açaí se houver
         "Raffaello", "Pistache", "Doce de Leite", "Abacaxi com Pedaços", "ChocoRum com Passas",
         "Pera", "Jabuticaba", "Mousse de Maracujá", "Iogurte com Laranja", "Jaca",
-        "Cupuaçu", "CHOCOMENTA", "Banana Trufada", "Chocolate", "Milho", "Açaí",
+        "Cupuaçu", "CHOCOMENTA", "Banana Trufada", "Chocolate", "Milho", 
         "Ninho Trufado", "Limão Nevado", "Morango", "Amarena Iogurte com Cereja",
         "Pão de Mel", "Paçoca", "Flocos"
       ];
@@ -827,6 +523,9 @@
         maxFlavorsCountEl.textContent = itemData.maxFlavors;
         maxToppingsCountEl.textContent = itemData.maxToppings;
 
+        // Decide quais sabores mostrar (todos ou apenas açaí se for item de açaí e você quiser restringir)
+        // Por enquanto, permite escolher da lista completa de `availableFlavors` para ambos.
+        // Se quiser restringir, precisaria de uma lógica aqui.
         populateOptions(flavorListEl, availableFlavors, 'flavor', itemData.maxFlavors, existingSelections.flavors);
         populateOptions(toppingListEl, availableToppings, 'topping', itemData.maxToppings, existingSelections.toppings);
         
@@ -1129,11 +828,11 @@
         message += `\n`;
         message += `*Prazo de Entrega Estimado:* 30 minutos`; 
         
-        const whatsappNumber = '5511965829000'; // !!! SEU NÚMERO DE WHATSAPP AQUI !!!
+        const whatsappNumber = '5511934080737'; // !!! SEU NÚMERO DE WHATSAPP AQUI !!!
         const finalURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
         
-        // console.log("Mensagem formatada (antes do encode):\n" + message); // Para depuração
-        // console.log("URL Final:", finalURL); // Para depuração
+        // console.log("Mensagem formatada (antes do encode):\n" + message); 
+        // console.log("URL Final:", finalURL); 
         
         window.open(finalURL, '_blank');
         
