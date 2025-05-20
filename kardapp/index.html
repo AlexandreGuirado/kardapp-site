@@ -139,6 +139,13 @@
       transition: all 0.3s ease;
       border: 2px solid var(--primary-color);
     }
+    .btn.disabled-btn {
+    background-color: #555;
+    border-color: #555;
+    color: #aaa;
+    cursor: not-allowed;
+    pointer-events: none; /* Desabilita cliques no botão */
+    }
 
     .btn:hover {
       background-color: var(--secondary-color);
@@ -146,6 +153,14 @@
       transform: translateY(-3px);
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
+    .btn.disabled-btn:hover { /* Garante que o hover não altere a aparência */
+    background-color: #555;
+    border-color: #555;
+    color: #aaa;
+    transform: none;
+    box-shadow: none;
+    }
+
     .btn-secondary {
         background-color: transparent;
         color: var(--primary-color);
@@ -184,6 +199,65 @@
         background-color: var(--secondary-color);
     }
 
+    #nossos-clientes {
+    /* Pode usar a cor de fundo alternada se quiser */
+    /* background-color: var(--light-bg-section); */
+    }
+
+    .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.testimonial-card {
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: 10px;
+    border-left: 5px solid var(--primary-color);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column; /* Para mobile, pode ser row em desktop */
+    align-items: center; /* Centraliza o logo em mobile */
+    text-align: center; /* Centraliza o texto em mobile */
+}
+
+.testimonial-card .client-logo {
+    max-width: 100px; /* Ajuste conforme o tamanho do logo */
+    max-height: 80px;
+    border-radius: 8px; /* Para logos quadrados/retangulares */
+    /* Se o logo for redondo, use border-radius: 50%; */
+    margin-bottom: 20px;
+    /* object-fit: contain; /* Para garantir que o logo não seja cortado */
+}
+
+.testimonial-text blockquote {
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--text-color-light);
+    margin-bottom: 15px;
+    line-height: 1.6;
+    position: relative;
+    padding-left: 20px; /* Espaço para as aspas */
+}
+.testimonial-text blockquote::before {
+    content: '\f10d'; /* Font Awesome aspas para a esquerda */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    position: absolute;
+    left: -5px;
+    top: -5px;
+    opacity: 0.7;
+}
+
+.testimonial-text .client-name {
+    font-weight: bold;
+    color: var(--primary-color);
+    font-size: 0.95rem;
+}
 
     /* Sobre Nós */
     #sobre .about-content {
@@ -318,7 +392,33 @@
         position: absolute;
         left: 0;
     }
+    .plan-card.coming-soon-card {
+    border-color: #777; /* Cinza para indicar que não está ativo */
+    opacity: 0.7;
+    }
+    .plan-card.coming-soon-card h3 {
+    color: #ccc; /* Cor do título mais apagada */
+    }
+    .plan-card.coming-soon-card .price {
+    font-size: 1.8rem; /* Ajusta o tamanho da fonte para "Em Breve!" */
+    color: var(--primary-color); /* Pode usar a cor primária para o "Em Breve!" */
+    }
 
+    .plan-card.coming-soon-card ul li::before {
+    color: #777; /* Cor do check icon mais apagada */
+    }
+
+    .plan-card.coming-soon-card .btn-secondary.disabled-btn {
+    background-color: transparent;
+    border-color: #555;
+    color: #777;
+    }
+    .plan-card.coming-soon-card .btn-secondary.disabled-btn:hover {
+    background-color: transparent;
+    border-color: #555;
+    color: #777;
+    }
+    
     /* Seção "Quem Pode Usar" / Público Alvo */
     #publico-alvo p {
         text-align: center;
@@ -405,6 +505,21 @@
         margin-top: 1px; /* Ajuste fino do ícone */
     }
 
+    @media (min-width: 600px) { 
+    .testimonial-card {
+        flex-direction: row;
+        text-align: left;
+        align-items: flex-start; /* Alinha itens ao topo */
+    }
+    .testimonial-card .client-logo {
+        margin-right: 20px;
+        margin-bottom: 0; /* Remove margem inferior no desktop */
+    }
+    .testimonial-text blockquote::before {
+        left: -10px; /* Ajusta posição das aspas */
+    }
+}
+
 
     /* Responsividade */
     @media (max-width: 768px) {
@@ -464,6 +579,7 @@
         <li><a href="#sobre">Sobre Nós</a></li>
         <li><a href="#servicos">Serviços</a></li>
         <li><a href="#planos">Planos</a></li>
+        <li><a href="#nossos-clientes">Clientes</a></li>
         <li><a href="#contato">Contato</a></li>
       </ul>
     </nav>
@@ -564,9 +680,9 @@
           </ul>
           <a href="#contato" class="btn">Quero o Profissional</a>
         </div>
-        <div class="plan-card">
+        <div class="plan-card coming-soon-card">
           <h3>Empresarial</h3>
-          <div class="price">R$ 299 <span>/mês</span></div>
+          <div class="price">Em Breve!</div>
           <ul>
             <li>Tudo do Profissional</li>
             <li>Domínio personalizado (seunome.com.br)</li>
@@ -575,9 +691,9 @@
           </ul>
           <a href="#contato" class="btn">Quero o Empresarial</a>
         </div>
-         <div class="plan-card">
+        <div class="plan-card coming-soon-card">
           <h3>Premium</h3>
-          <div class="price">R$ 499 <span>/mês</span></div>
+          <div class="price">Em Breve!</div>
           <ul>
             <li>Tudo do Empresarial</li>
             <li>Integração com painel de pedidos*</li>
@@ -587,6 +703,35 @@
           <small style="font-size:0.75rem; margin-bottom:10px; display:block;">*Painel de pedidos pode ter custo adicional ou ser parte de outro serviço.</small>
           <a href="#contato" class="btn">Quero o Premium</a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="nossos-clientes">
+    <div class="container">
+      <h2 class="section-title">Nossos Clientes Satisfeitos</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <img src="https://i.ibb.co/HTq6pqVS/sensa2.png" alt="Logo Sensação Sorveteria" class="client-logo">
+          <div class="testimonial-text">
+            <blockquote>
+              "Depois de adotar o cardápio digital da Kardapp, facilitou muito nosso serviço na questão de receber pedidos online. A praticidade é incrível e nossos clientes adoraram!"
+            </blockquote>
+            <p class="client-name">- Sensação Sorveteria</p>
+          </div>
+        </div>
+        <!-- Adicione mais cards de depoimento aqui conforme tiver mais clientes -->
+        <!-- 
+        <div class="testimonial-card">
+          <img src="URL_LOGO_OUTRO_CLIENTE.png" alt="Logo Outro Cliente" class="client-logo">
+          <div class="testimonial-text">
+            <blockquote>
+              "Depoimento do outro cliente aqui..."
+            </blockquote>
+            <p class="client-name">- Nome do Outro Cliente</p>
+          </div>
+        </div>
+        -->
       </div>
     </div>
   </section>
