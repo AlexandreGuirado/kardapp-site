@@ -201,8 +201,6 @@
       background-color: var(--accent-color);
     }
     
-    /* ... (Restante do CSS igual ao anterior, não vou repetir tudo para economizar espaço) ... */
-    /* Estilos do carrinho, modal, formulário de checkout permanecem os mesmos */
     .cart-section {position: fixed;bottom: 0;left: 0;right: 0;background-color: var(--card-background);box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);padding: 15px;transform: translateY(100%);transition: transform 0.3s;z-index: 100;border-radius: 20px 20px 0 0;}
     .cart-section.show {transform: translateY(0);}
     .cart-header {display: flex;justify-content: space-between;align-items: center;margin-bottom: 15px;}
@@ -251,7 +249,7 @@
   <header>
     <div class="container"> 
       <div class="logo-container">
-        <img src="https://i.ibb.co/HTq6pqVS/sensa2.png alt="Logo Sensação Sorveteria">
+        <img src="https://i.ibb.co/HTq6pqVS/sensa2.png" alt="Logo Sensação Sorveteria">
       </div>
       <h1>Sensação Sorveteria</h1>
     </div>
@@ -396,7 +394,6 @@
     <span class="cart-count">0</span>
   </div>
   
-  <!-- Carrinho, Modal e Formulário de Checkout (sem alterações, permanecem como antes) -->
   <div class="cart-section"> <div class="container"> <div class="cart-header"> <h3 class="cart-title">Seu Pedido</h3> <button class="close-cart"><i class="fas fa-times"></i></button> </div> <div class="cart-items"></div> <div class="cart-total"> <span>Total:</span> <span class="total-amount">R$ 0,00</span> </div> <button class="checkout-btn" id="checkout-btn"> <i class="fab fa-whatsapp"></i> Finalizar Pedido </button> <div class="checkout-form" id="checkout-form"> <button class="back-to-cart" id="back-to-cart"> <i class="fas fa-arrow-left"></i> Voltar ao carrinho </button> <div class="form-group"> <label for="customer-name">Nome:</label> <input type="text" id="customer-name" placeholder="Seu nome completo" required> </div> <div class="form-group"> <label for="customer-phone">Telefone (WhatsApp):</label> <input type="tel" id="customer-phone" placeholder="(XX) XXXXX-XXXX" required> </div> <div class="form-group"> <label for="delivery-address">Endereço de Entrega (ou "Retirar no local"):</label> <input type="text" id="delivery-address" placeholder="Rua, número, bairro, complemento" required> </div> <div class="form-group"> <label for="order-notes">Observações:</label> <textarea id="order-notes" placeholder="Alguma observação sobre seu pedido? (Ex: sem algum ingrediente, ponto de referência)"></textarea> </div> <div class="payment-method"> <h4>Forma de Pagamento:</h4> <div class="payment-option"> <input type="radio" id="payment-pix" name="payment" value="Pix" checked> <label for="payment-pix">Pix</label> </div> <div class="payment-option"> <input type="radio" id="payment-card" name="payment" value="Cartão"> <label for="payment-card">Cartão (na entrega)</label> </div> <div class="payment-option"> <input type="radio" id="payment-cash" name="payment" value="Dinheiro"> <label for="payment-cash">Dinheiro</label> </div> <div class="cash-group" id="cash-group"> <div class="form-group"> <label for="cash-amount">Valor em dinheiro para troco:</label> <input type="number" id="cash-amount" placeholder="Ex: 50 (para R$50,00)"> </div> <div class="form-group"> <label>Troco:</label> <input type="text" id="change-amount" placeholder="R$ 0,00" readonly> </div> </div> </div> <button class="checkout-btn" id="send-order-btn"> <i class="fas fa-paper-plane"></i> Enviar Pedido via WhatsApp </button> </div> </div> </div>
   <div id="flavorModal" class="flavor-modal"> <div class="modal-content"> <span class="close-modal-btn">×</span> <h3 id="modalItemName" class="modal-title">Personalize seu Item</h3> <input type="hidden" id="editingItemIndex" value="-1"> <div id="modalFlavorOptions" class="options-group"> <h4>Escolha até <span id="maxFlavorsCount">2</span> sabores:</h4> <div class="options-list" id="flavorList"></div> </div> <div id="modalToppingOptions" class="options-group"> <h4>Escolha até <span id="maxToppingsCount">2</span> acompanhamentos:</h4> <div class="options-list" id="toppingList"></div> </div> <button id="confirmFlavorSelection" class="modal-confirm-btn">Confirmar e Adicionar</button> </div> </div>
   
@@ -435,9 +432,8 @@
       
       let currentCustomizingItemDetails = null; 
 
-      // SABORES DE MASSA (SORVETE) E AÇAÍ (assumindo que podem escolher os mesmos sabores de sorvete no açaí)
       const availableFlavors = [
-        "Açaí Tradicional",  // Opções específicas de Açaí se houver
+        "Açaí Tradicional",  
         "Raffaello", "Pistache", "Doce de Leite", "Abacaxi com Pedaços", "ChocoRum com Passas",
         "Pera", "Jabuticaba", "Mousse de Maracujá", "Iogurte com Laranja", "Jaca",
         "Cupuaçu", "CHOCOMENTA", "Banana Trufada", "Chocolate", "Milho", 
@@ -447,7 +443,7 @@
       
       const availableToppings = [
         "Pingos de Chocolate", "Amendoim Triturado", "Bala de Coco", "Granulado", "Pingo de Leite",
-        "Canudo de Biju", "Paçoca (Doce)", "Farofa de Paçoca", "Granulado Colorido", "Leite Condensado", "Creme de Avelã"
+        "Canudo de Biju", "Paçoca (Doce)", "Farofa de Paçoca", "Granulado Colorido", "Leite Condensado", "Creme de Avelã", //Adicionado Marshmallow
         "Confetti", "Bala de Goma Azeda", "Dentaduras (Fini)", "Amendoim com Chocolate", "Granola",
         "Leite em Pó", "Bala Beijos (Fini)", "Bala Amoras (Fini)", "Sucrilhos", "Argolinhas Coloridas",
         "Chocoball", "Calda de Morango", "Calda de Chocolate", "Calda de Caramelo", "Calda Fini (Beijos)", "Calda Fini (Banana)"
@@ -522,16 +518,10 @@
         modalItemNameEl.textContent = `Personalize seu ${itemData.name}`;
         maxFlavorsCountEl.textContent = itemData.maxFlavors;
         maxToppingsCountEl.textContent = itemData.maxToppings;
-
-        // Decide quais sabores mostrar (todos ou apenas açaí se for item de açaí e você quiser restringir)
-        // Por enquanto, permite escolher da lista completa de `availableFlavors` para ambos.
-        // Se quiser restringir, precisaria de uma lógica aqui.
         populateOptions(flavorListEl, availableFlavors, 'flavor', itemData.maxFlavors, existingSelections.flavors);
         populateOptions(toppingListEl, availableToppings, 'topping', itemData.maxToppings, existingSelections.toppings);
-        
         checkSelectionLimit('flavor', itemData.maxFlavors);
         checkSelectionLimit('topping', itemData.maxToppings);
-
         flavorModal.style.display = 'block';
       }
 
@@ -629,11 +619,9 @@
       
       function updateCart() {
         cartItemsContainer.innerHTML = '';
-        
         cart.forEach((item, index) => {
           const cartItemElement = document.createElement('div');
           cartItemElement.className = 'cart-item';
-          
           let itemDetailsHTML = `<span class="cart-item-name">${item.name}</span>`;
           if (item.isCustomizable) { 
             if (item.flavors && item.flavors.length > 0) {
@@ -643,223 +631,64 @@
               itemDetailsHTML += `<span class="cart-item-sub-details">Acompanhamentos: ${item.toppings.join(', ')}</span>`;
             }
           }
-
           let editButtonHTML = '';
           if (item.isCustomizable) {
             editButtonHTML = `<button class="edit-item" data-index="${index}" title="Editar item"><i class="fas fa-edit"></i></button>`;
           }
-
-          cartItemElement.innerHTML = `
-            <div class="cart-item-details">${itemDetailsHTML}</div>
-            <div class="cart-item-price">R$ ${item.price.toFixed(2).replace('.', ',')}</div>
-            <div class="cart-item-actions">
-              ${editButtonHTML}
-              <button class="decrease-item" data-index="${index}" title="Diminuir"><i class="fas fa-minus"></i></button>
-              <span>${item.quantity}</span>
-              <button class="increase-item" data-index="${index}" title="Aumentar"><i class="fas fa-plus"></i></button>
-              <button class="remove-item" data-index="${index}" title="Remover"><i class="fas fa-trash"></i></button>
-            </div>
-          `;
-          
+          cartItemElement.innerHTML = `<div class="cart-item-details">${itemDetailsHTML}</div><div class="cart-item-price">R$ ${item.price.toFixed(2).replace('.', ',')}</div><div class="cart-item-actions">${editButtonHTML}<button class="decrease-item" data-index="${index}" title="Diminuir"><i class="fas fa-minus"></i></button><span>${item.quantity}</span><button class="increase-item" data-index="${index}" title="Aumentar"><i class="fas fa-plus"></i></button><button class="remove-item" data-index="${index}" title="Remover"><i class="fas fa-trash"></i></button></div>`;
           cartItemsContainer.appendChild(cartItemElement);
         });
-        
         const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
         const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        
         cartCount.textContent = totalItems;
         totalAmount.textContent = `R$ ${totalPrice.toFixed(2).replace('.', ',')}`;
-        
-        cartItemsContainer.querySelectorAll('.decrease-item').forEach(button => {
-          button.addEventListener('click', function() {
-            const index = parseInt(this.getAttribute('data-index'));
-            if (cart[index].quantity > 1) {
-              cart[index].quantity -= 1;
-            } else {
-              cart.splice(index, 1); 
-            }
-            updateCart();
-          });
-        });
-        
-        cartItemsContainer.querySelectorAll('.increase-item').forEach(button => {
-          button.addEventListener('click', function() {
-            const index = parseInt(this.getAttribute('data-index'));
-            cart[index].quantity += 1;
-            updateCart();
-          });
-        });
-        
-        cartItemsContainer.querySelectorAll('.remove-item').forEach(button => {
-          button.addEventListener('click', function() {
-            const index = parseInt(this.getAttribute('data-index'));
-            cart.splice(index, 1);
-            updateCart();
-          });
-        });
-
-        cartItemsContainer.querySelectorAll('.edit-item').forEach(button => {
-          button.addEventListener('click', function() {
-            const index = parseInt(this.getAttribute('data-index'));
-            const itemToEdit = cart[index];
-            
-            const originalItemButton = document.querySelector(`.customize-item-btn[data-item-name="${itemToEdit.name}"]`);
-            if (!originalItemButton) {
-                console.error("Não foi possível encontrar o item original para edição:", itemToEdit.name);
-                alert("Erro ao tentar editar o item. Tente remover e adicionar novamente.");
-                return;
-            }
-
-            currentCustomizingItemDetails = {
-                id: originalItemButton.dataset.itemId,
-                name: itemToEdit.name, 
-                price: itemToEdit.price, 
-                maxFlavors: parseInt(originalItemButton.dataset.maxFlavors),
-                maxToppings: parseInt(originalItemButton.dataset.maxToppings)
-            };
-            
-            editingItemIndexInput.value = index; 
-            confirmFlavorSelectionBtn.textContent = "Confirmar Edição";
-            openFlavorSelectionModal(currentCustomizingItemDetails, { flavors: itemToEdit.flavors || [], toppings: itemToEdit.toppings || [] });
-          });
-        });
+        cartItemsContainer.querySelectorAll('.decrease-item').forEach(button => {button.addEventListener('click', function() {const index = parseInt(this.getAttribute('data-index'));if (cart[index].quantity > 1) {cart[index].quantity -= 1;} else {cart.splice(index, 1); } updateCart();});});
+        cartItemsContainer.querySelectorAll('.increase-item').forEach(button => {button.addEventListener('click', function() {const index = parseInt(this.getAttribute('data-index'));cart[index].quantity += 1;updateCart();});});
+        cartItemsContainer.querySelectorAll('.remove-item').forEach(button => {button.addEventListener('click', function() {const index = parseInt(this.getAttribute('data-index'));cart.splice(index, 1);updateCart();});});
+        cartItemsContainer.querySelectorAll('.edit-item').forEach(button => {button.addEventListener('click', function() {const index = parseInt(this.getAttribute('data-index'));const itemToEdit = cart[index];const originalItemButton = document.querySelector(`.customize-item-btn[data-item-name="${itemToEdit.name}"]`);if (!originalItemButton) {console.error("Não encontrado:", itemToEdit.name);alert("Erro.");return;}currentCustomizingItemDetails = {id: originalItemButton.dataset.itemId,name: itemToEdit.name, price: itemToEdit.price, maxFlavors: parseInt(originalItemButton.dataset.maxFlavors),maxToppings: parseInt(originalItemButton.dataset.maxToppings)};editingItemIndexInput.value = index; confirmFlavorSelectionBtn.textContent = "Confirmar Edição";openFlavorSelectionModal(currentCustomizingItemDetails, { flavors: itemToEdit.flavors || [], toppings: itemToEdit.toppings || [] });});});
       }
       
-      categoryButtons.forEach(button => {
-        button.addEventListener('click', function() {
-          categoryButtons.forEach(btn => btn.classList.remove('active'));
-          this.classList.add('active');
-          const selectedCategory = this.dataset.category;
-          filterMenuItems(selectedCategory, searchInput.value.toLowerCase());
-        });
-      });
-
-      searchInput.addEventListener('input', function() {
-          const selectedCategory = document.querySelector('.category-btn.active').dataset.category;
-          filterMenuItems(selectedCategory, this.value.toLowerCase());
-      });
-
-      function filterMenuItems(category, searchTerm) {
-          menuItems.forEach(item => {
-              const itemCategory = item.dataset.category;
-              const itemName = item.querySelector('.item-name').textContent.toLowerCase();
-              const itemDescription = item.querySelector('.item-description').textContent.toLowerCase();
-              const categoryMatch = (category === 'todos' || itemCategory === category);
-              const searchTermMatch = (itemName.includes(searchTerm) || itemDescription.includes(searchTerm) || searchTerm === '');
-              item.classList.toggle('hidden', !(categoryMatch && searchTermMatch));
-          });
-      }
-      
-      paymentOptions.forEach(option => {
-        option.addEventListener('change', function() {
-          cashGroup.style.display = (this.value === 'Dinheiro' ? 'block' : 'none');
-          if (this.value !== 'Dinheiro') {
-            cashAmount.value = '';
-            changeAmount.value = 'R$ 0,00';
-          }
-        });
-      });
-      
-      cashAmount.addEventListener('input', function() {
-        const totalPrice = parseFloat(totalAmount.textContent.replace('R$', '').replace(',', '.'));
-        const cashValue = parseFloat(this.value) || 0;
-        const change = cashValue - totalPrice;
-        changeAmount.value = (change >= 0) ? `R$ ${change.toFixed(2).replace('.', ',')}` : 'Valor insuficiente';
-      });
+      categoryButtons.forEach(button => {button.addEventListener('click', function() {categoryButtons.forEach(btn => btn.classList.remove('active'));this.classList.add('active');const selectedCategory = this.dataset.category;filterMenuItems(selectedCategory, searchInput.value.toLowerCase());});});
+      searchInput.addEventListener('input', function() {const selectedCategory = document.querySelector('.category-btn.active').dataset.category;filterMenuItems(selectedCategory, this.value.toLowerCase());});
+      function filterMenuItems(category, searchTerm) {menuItems.forEach(item => {const itemCategory = item.dataset.category;const itemName = item.querySelector('.item-name').textContent.toLowerCase();const itemDescription = item.querySelector('.item-description').textContent.toLowerCase();const categoryMatch = (category === 'todos' || itemCategory === category);const searchTermMatch = (itemName.includes(searchTerm) || itemDescription.includes(searchTerm) || searchTerm === '');item.classList.toggle('hidden', !(categoryMatch && searchTermMatch));});}
+      paymentOptions.forEach(option => {option.addEventListener('change', function() {cashGroup.style.display = (this.value === 'Dinheiro' ? 'block' : 'none');if (this.value !== 'Dinheiro') {cashAmount.value = '';changeAmount.value = 'R$ 0,00';}});});
+      cashAmount.addEventListener('input', function() {const totalPrice = parseFloat(totalAmount.textContent.replace('R$', '').replace(',', '.'));const cashValue = parseFloat(this.value) || 0;const change = cashValue - totalPrice;changeAmount.value = (change >= 0) ? `R$ ${change.toFixed(2).replace('.', ',')}` : 'Valor insuficiente';});
       
       sendOrderBtn.addEventListener('click', function() {
         const name = document.getElementById('customer-name').value.trim();
         const phone = document.getElementById('customer-phone').value.trim();
         const address = document.getElementById('delivery-address').value.trim();
         const notes = document.getElementById('order-notes').value.trim();
-        
         const paymentMethodElement = document.querySelector('input[name="payment"]:checked');
-        if (!paymentMethodElement) {
-          alert('Por favor, selecione uma forma de pagamento.'); 
-          return; 
-        }
+        if (!paymentMethodElement) {alert('Por favor, selecione uma forma de pagamento.'); return;}
         const paymentMethod = paymentMethodElement.value;
-        
-        // Validações de campos obrigatórios
         if (!name) { alert('Por favor, preencha o campo Nome.'); return; }
         if (!phone) { alert('Por favor, preencha o campo Telefone.'); return; }
         if (!address) { alert('Por favor, preencha o campo Endereço.'); return; }
-
-        if (paymentMethod === 'Dinheiro') {
-            const totalPrice = parseFloat(totalAmount.textContent.replace('R$', '').replace(',', '.'));
-            const cashValue = parseFloat(cashAmount.value) || 0;
-            if (!cashAmount.value || cashValue < totalPrice) {
-                alert('Para pagamento em dinheiro, insira um valor para troco que seja igual ou maior que o total do pedido.'); return;
-            }
-        }
-
-        // !!!!! IMPORTANTE: DEFINA A CHAVE PIX DA LOJA AQUI !!!!!
-        const CHAVE_PIX_LOJA = "40026419000137"; // Ou telefone, ou chave aleatória, etc.
+        if (paymentMethod === 'Dinheiro') {const totalPrice = parseFloat(totalAmount.textContent.replace('R$', '').replace(',', '.'));const cashValue = parseFloat(cashAmount.value) || 0;if (!cashAmount.value || cashValue < totalPrice) {alert('Para pagamento em dinheiro, insira um valor para troco que seja igual ou maior que o total do pedido.'); return;}}
+        
+        const CHAVE_PIX_LOJA = "01542586389"; // SUBSTITUA PELA CHAVE PIX REAL DA LOJA
 
         let message = `🍦 *NOVO PEDIDO - Sensação Sorveteria*\n\n`;
         message += `*Cliente:* ${name}\n`;
         message += `*Telefone:* ${phone}\n`;
         message += `*Endereço:* ${address}\n`;
-        
-        if (notes) {
-            message += `*Observações:* ${notes}\n`;
-        }
-        message += `\n`; 
-
-        message += `*Itens do Pedido:*\n`; 
-        
-        cart.forEach(item => {
-          message += `- *${item.name}* (${item.quantity}x) - R$ ${(item.price * item.quantity).toFixed(2).replace('.', ',')}`;
-          if (item.isCustomizable) {
-            if (item.flavors && item.flavors.length > 0) {
-              message += `\n  _Sabores: ${item.flavors.join(', ')}_`;
-            }
-            if (item.toppings && item.toppings.length > 0) {
-              message += `\n  _Acompanhamentos: ${item.toppings.join(', ')}_`;
-            }
-          }
-          message += `\n`; 
-        });
-        
+        if (notes) {message += `*Observações:* ${notes}\n`;}
+        message += `\n*Itens do Pedido:*\n`; 
+        cart.forEach(item => {message += `- *${item.name}* (${item.quantity}x) - R$ ${(item.price * item.quantity).toFixed(2).replace('.', ',')}`;if (item.isCustomizable) {if (item.flavors && item.flavors.length > 0) {message += `\n  _Sabores: ${item.flavors.join(', ')}_`;}if (item.toppings && item.toppings.length > 0) {message += `\n  _Acompanhamentos: ${item.toppings.join(', ')}_`;}}message += `\n`; });
         message += `\n*Total do Pedido:* ${totalAmount.textContent}\n`;
         message += `*Forma de Pagamento:* ${paymentMethod}\n`;
+        if (paymentMethod === 'Pix') {message += `*Chave Pix para pagamento:* ${CHAVE_PIX_LOJA}\n`;message += `_(Após o pagamento, por favor, envie o comprovante aqui no chat.)_\n`;}
+        if (paymentMethod === 'Dinheiro') {message += `*Valor Pago:* R$ ${parseFloat(cashAmount.value).toFixed(2).replace('.', ',')}\n`;message += `*Troco:* ${changeAmount.value}\n`;}
+        message += `\n*Prazo de Entrega Estimado:* 30 minutos`; 
         
-        // Adicionar chave PIX se a forma de pagamento for PIX
-        if (paymentMethod === 'Pix') {
-          message += `*Chave Pix para pagamento:* ${CHAVE_PIX_LOJA}\n`;
-          // Opcional: Adicionar uma mensagem para enviar o comprovante
-          message += `_(Após o pagamento, por favor, envie o comprovante aqui no chat.)_\n`;
-        }
-        
-        if (paymentMethod === 'Dinheiro') {
-          message += `*Valor Pago:* R$ ${parseFloat(cashAmount.value).toFixed(2).replace('.', ',')}\n`;
-          message += `*Troco:* ${changeAmount.value}\n`;
-        }
-        
-        message += `\n`; // Espaçamento antes do prazo de entrega
-        message += `*Prazo de Entrega Estimado:* 30 minutos`; 
-        
-        const whatsappNumber = '5511934080737'; // !!! SEU NÚMERO DE WHATSAPP AQUI !!!
+        const whatsappNumber = '5511934080737'; // SEU NÚMERO DE WHATSAPP AQUI
         const finalURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-        
-        // console.log("Mensagem formatada (antes do encode):\n" + message); 
-        // console.log("URL Final:", finalURL); 
-        
         window.open(finalURL, '_blank');
-        
-        // Limpar carrinho e formulário
-        cart = []; updateCart();
-        checkoutForm.style.display = 'none';
-        cartItemsContainer.style.display = 'block';
-        document.querySelector('.cart-header').style.display = 'flex';
-        document.querySelector('.cart-total').style.display = 'flex';
-        checkoutBtn.style.display = 'flex';
-        cartSection.classList.remove('show');
+        cart = []; updateCart();checkoutForm.style.display = 'none';cartItemsContainer.style.display = 'block';document.querySelector('.cart-header').style.display = 'flex';document.querySelector('.cart-total').style.display = 'flex';checkoutBtn.style.display = 'flex';cartSection.classList.remove('show');
         ['customer-name', 'customer-phone', 'delivery-address', 'order-notes', 'cash-amount', 'change-amount'].forEach(id => document.getElementById(id).value = '');
-        document.getElementById('payment-pix').checked = true; 
-        cashGroup.style.display = 'none';
+        document.getElementById('payment-pix').checked = true; cashGroup.style.display = 'none';
       });
-
       filterMenuItems('todos', ''); 
       updateCart(); 
     });
