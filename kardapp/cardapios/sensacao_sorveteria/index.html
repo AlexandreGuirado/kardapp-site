@@ -667,7 +667,7 @@
         if (!address) { alert('Por favor, preencha o campo Endereço.'); return; }
         if (paymentMethod === 'Dinheiro') {const totalPrice = parseFloat(totalAmount.textContent.replace('R$', '').replace(',', '.'));const cashValue = parseFloat(cashAmount.value) || 0;if (!cashAmount.value || cashValue < totalPrice) {alert('Para pagamento em dinheiro, insira um valor para troco que seja igual ou maior que o total do pedido.'); return;}}
         
-        const CHAVE_PIX_LOJA = "01542586389"; // SUBSTITUA PELA CHAVE PIX REAL DA LOJA
+        const CHAVE_PIX_LOJA = "40026419000137"; // SUBSTITUA PELA CHAVE PIX REAL DA LOJA
 
         let message = `🍦 *NOVO PEDIDO - Sensação Sorveteria*\n\n`;
         message += `*Cliente:* ${name}\n`;
