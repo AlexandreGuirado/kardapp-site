@@ -447,7 +447,7 @@
       
       const availableToppings = [
         "Pingos de Chocolate", "Amendoim Triturado", "Bala de Coco", "Granulado", "Pingo de Leite",
-        "Canudo de Biju", "Paçoca (Doce)", "Farofa de Paçoca", "Granulado Colorido",
+        "Canudo de Biju", "Paçoca (Doce)", "Farofa de Paçoca", "Granulado Colorido", "Leite Condensado", "Creme de Avelã"
         "Confetti", "Bala de Goma Azeda", "Dentaduras (Fini)", "Amendoim com Chocolate", "Granola",
         "Leite em Pó", "Bala Beijos (Fini)", "Bala Amoras (Fini)", "Sucrilhos", "Argolinhas Coloridas",
         "Chocoball", "Calda de Morango", "Calda de Chocolate", "Calda de Caramelo", "Calda Fini (Beijos)", "Calda Fini (Banana)"
@@ -780,6 +780,7 @@
         }
         const paymentMethod = paymentMethodElement.value;
         
+        // Validações de campos obrigatórios
         if (!name) { alert('Por favor, preencha o campo Nome.'); return; }
         if (!phone) { alert('Por favor, preencha o campo Telefone.'); return; }
         if (!address) { alert('Por favor, preencha o campo Endereço.'); return; }
@@ -791,7 +792,10 @@
                 alert('Para pagamento em dinheiro, insira um valor para troco que seja igual ou maior que o total do pedido.'); return;
             }
         }
-        
+
+        // !!!!! IMPORTANTE: DEFINA A CHAVE PIX DA LOJA AQUI !!!!!
+        const CHAVE_PIX_LOJA = "40026419000137"; // Ou telefone, ou chave aleatória, etc.
+
         let message = `🍦 *NOVO PEDIDO - Sensação Sorveteria*\n\n`;
         message += `*Cliente:* ${name}\n`;
         message += `*Telefone:* ${phone}\n`;
@@ -820,12 +824,19 @@
         message += `\n*Total do Pedido:* ${totalAmount.textContent}\n`;
         message += `*Forma de Pagamento:* ${paymentMethod}\n`;
         
+        // Adicionar chave PIX se a forma de pagamento for PIX
+        if (paymentMethod === 'Pix') {
+          message += `*Chave Pix para pagamento:* ${CHAVE_PIX_LOJA}\n`;
+          // Opcional: Adicionar uma mensagem para enviar o comprovante
+          message += `_(Após o pagamento, por favor, envie o comprovante aqui no chat.)_\n`;
+        }
+        
         if (paymentMethod === 'Dinheiro') {
           message += `*Valor Pago:* R$ ${parseFloat(cashAmount.value).toFixed(2).replace('.', ',')}\n`;
           message += `*Troco:* ${changeAmount.value}\n`;
         }
         
-        message += `\n`;
+        message += `\n`; // Espaçamento antes do prazo de entrega
         message += `*Prazo de Entrega Estimado:* 30 minutos`; 
         
         const whatsappNumber = '5511934080737'; // !!! SEU NÚMERO DE WHATSAPP AQUI !!!
@@ -836,6 +847,7 @@
         
         window.open(finalURL, '_blank');
         
+        // Limpar carrinho e formulário
         cart = []; updateCart();
         checkoutForm.style.display = 'none';
         cartItemsContainer.style.display = 'block';
