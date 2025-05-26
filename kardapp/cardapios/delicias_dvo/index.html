@@ -34,13 +34,22 @@
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 20px;
+      padding: 0 20px; /* Removido padding vertical para controle mais granular */
+    }
+
+    header .container-header { /* Container específico para o header */
+        display: flex; 
+        align-items: center; 
+        justify-content: space-between;
+        padding: 10px 20px; /* Padding vertical e horizontal para o conteúdo do header */
+        max-width: 1200px;
+        margin: 0 auto;
     }
     
     header {
       background-color: var(--primary-color);
       color: var(--text-on-primary);
-      padding: 10px 0; 
+      /* padding: 10px 0;  Removido, controlado pelo .container-header */
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       margin-bottom: 30px;
       position: sticky;
@@ -48,16 +57,11 @@
       z-index: 1000;
     }
 
-    header .container { 
-      display: flex; 
-      align-items: center; 
-      justify-content: space-between;
-      padding: 0 20px; 
-    }
-
     .header-left {
         display: flex;
         align-items: center;
+        text-decoration: none; /* Para o link do logo */
+        color: inherit; /* Para o link do logo */
     }
 
     header .logo-container {
@@ -66,18 +70,20 @@
     }
 
     header .logo-container img {
-        max-width: 60px; 
-        height: 60px;
+        max-width: 50px; /* Reduzido um pouco para melhor alinhamento */
+        height: 50px;
         border-radius: 50%;
         border: 2px solid var(--text-on-primary); 
         object-fit: cover;
+        display: block; /* Para remover espaço extra abaixo da imagem */
     }
     
     header h1 {
-      font-size: 1.6rem;
+      font-size: 1.5rem; /* Ajustado */
       margin-bottom: 0; 
       font-weight: 700;
       color: #fff;
+      line-height: 1; /* Para melhor alinhamento vertical com o logo */
     }
 
     .header-social-links {
@@ -87,7 +93,7 @@
 
     .header-social-links a {
       color: var(--text-on-primary); 
-      font-size: 1.5rem; 
+      font-size: 1.4rem; /* Ajustado */
       margin-left: 15px; 
       transition: color 0.3s ease, transform 0.3s ease;
     }
@@ -97,149 +103,40 @@
       transform: scale(1.1);
     }
     
+    .main-content-container { /* Novo container para o conteúdo principal */
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px; /* Padding que antes estava no .container geral */
+    }
+
     .search-bar {
       padding: 15px;
       background-color: var(--card-background);
       border-radius: 10px;
-      margin: 20px auto;
+      margin: 0 auto 20px auto; /* Ajustado margin */
       max-width: 600px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
       border: 1px solid var(--border-color-light);
     }
     
-    .search-bar input {
-      width: 100%;
-      padding: 12px 15px;
-      border: 1px solid #ddd;
-      border-radius: 30px;
-      font-size: 1rem;
-      outline: none;
-      transition: border-color 0.3s;
-    }
-    
-    .search-bar input:focus {
-      border-color: var(--primary-color);
-    }
-    
-    .categories {
-      display: flex;
-      justify-content: center;
-      gap: 10px; 
-      margin-bottom: 30px;
-      flex-wrap: wrap;
-    }
-    
-    .category-btn {
-      padding: 8px 18px; 
-      background-color: var(--card-background);
-      border: 2px solid var(--primary-color);
-      border-radius: 30px;
-      color: var(--primary-color);
-      font-weight: 600;
-      font-size: 0.9rem; 
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-    
-    .category-btn.active, .category-btn:hover {
-      background-color: var(--primary-color);
-      color: var(--text-on-primary);
-    }
-    
-    .menu-items {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
-      gap: 25px; 
-      margin-bottom: 40px;
-    }
-    
-    .menu-item {
-      background-color: var(--card-background);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07); 
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      display: flex; /* Mantido para o layout do card */
-      flex-direction: column;
-      border: 1px solid var(--border-color-light);
-    }
-     .menu-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    }
-    .menu-item.hidden { /* CSS para esconder os itens filtrados */
-        display: none !important; 
-    }
-
-
-    .item-image {
-        width: 100%;
-        height: 200px; 
-        object-fit: cover; 
-    }
-    
-    .item-content {
-      padding: 15px; 
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .item-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 8px; 
-    }
-    
-    .item-name {
-      font-size: 1.15rem; 
-      font-weight: 600;
-      color: var(--accent-color);
-      flex-grow: 1; 
-      margin-right: 10px; 
-      line-height: 1.3;
-    }
-    
-    .item-price {
-      font-size: 1.1rem; 
-      font-weight: 700;
-      color: var(--primary-color);
-      white-space: nowrap; 
-      flex-shrink: 0; 
-    }
-    
-    .item-description {
-      color: #555;
-      margin-bottom: 15px; 
-      font-size: 0.88rem; 
-      flex-grow: 1;
-      line-height: 1.5;
-    }
-        
-    .add-to-cart, .customize-item-btn {
-      width: 100%;
-      padding: 10px; 
-      background-color: var(--primary-color);
-      color: var(--text-on-primary);
-      border: none;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin-top: auto; 
-      font-size: 0.95rem; 
-    }
-    
-    .add-to-cart:hover, .customize-item-btn:hover {
-      background-color: var(--secondary-color);
-    }
-    
-    /* ESTILOS DO CARRINHO, MODAL, CHECKOUT FORM (sem alterações visuais significativas aqui) */
+    /* ... (Restante do CSS permanece o mesmo da sua última versão, exceto as modificações responsivas do header abaixo) ... */
+    .search-bar input {width: 100%;padding: 12px 15px;border: 1px solid #ddd;border-radius: 30px;font-size: 1rem;outline: none;transition: border-color 0.3s;}
+    .search-bar input:focus {border-color: var(--primary-color);}
+    .categories {display: flex;justify-content: center;gap: 10px; margin-bottom: 30px;flex-wrap: wrap;}
+    .category-btn {padding: 8px 18px; background-color: var(--card-background);border: 2px solid var(--primary-color);border-radius: 30px;color: var(--primary-color);font-weight: 600;font-size: 0.9rem; cursor: pointer;transition: all 0.3s;}
+    .category-btn.active, .category-btn:hover {background-color: var(--primary-color);color: var(--text-on-primary);}
+    .menu-items {display: grid;grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; margin-bottom: 40px;}
+    .menu-item {background-color: var(--card-background);border-radius: 12px;overflow: hidden;box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07); transition: transform 0.3s ease, box-shadow 0.3s ease;display: flex; flex-direction: column;border: 1px solid var(--border-color-light);}
+    .menu-item:hover {transform: translateY(-5px);box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);}
+    .menu-item.hidden {display: none !important; }
+    .item-image {width: 100%;height: 200px; object-fit: cover; }
+    .item-content {padding: 15px; flex-grow: 1;display: flex;flex-direction: column;}
+    .item-header {display: flex;justify-content: space-between;align-items: flex-start;margin-bottom: 8px; }
+    .item-name {font-size: 1.15rem; font-weight: 600;color: var(--accent-color);flex-grow: 1; margin-right: 10px; line-height: 1.3;}
+    .item-price {font-size: 1.1rem; font-weight: 700;color: var(--primary-color);white-space: nowrap; flex-shrink: 0; }
+    .item-description {color: #555;margin-bottom: 15px; font-size: 0.88rem; flex-grow: 1;line-height: 1.5;}
+    .add-to-cart, .customize-item-btn {width: 100%;padding: 10px; background-color: var(--primary-color);color: var(--text-on-primary);border: none;border-radius: 8px;font-weight: 600;cursor: pointer;transition: background-color 0.3s;display: flex;align-items: center;justify-content: center;gap: 8px;margin-top: auto; font-size: 0.95rem; }
+    .add-to-cart:hover, .customize-item-btn:hover {background-color: var(--secondary-color);}
     .cart-section {position: fixed;bottom: 0;left: 0;right: 0;background-color: #fff;box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);padding: 15px;transform: translateY(100%);transition: transform 0.3s;z-index: 100;border-radius: 20px 20px 0 0; border-top: 1px solid var(--border-color-light);}
     .cart-section.show {transform: translateY(0);}
     .cart-header {display: flex;justify-content: space-between;align-items: center;margin-bottom: 15px;}
@@ -285,12 +182,12 @@
     .modal-confirm-btn:hover {background-color: var(--secondary-color);}
     
     @media (max-width: 768px) { 
-      header .container { flex-wrap: wrap; }
-      header .header-left { width: auto; } 
-      header h1 {font-size: 1.3rem; margin-right: auto; } 
-      header .logo-container img {max-width: 50px; height: 50px;} 
-      .header-social-links { width: auto; margin-top: 5px; margin-left:0; justify-content: flex-end; width: 100%; }
-      .header-social-links a {font-size: 1.3rem; margin-left: 12px; } 
+      header .container-header { flex-wrap: wrap; } /* Permite quebra de linha */
+      .header-left { min-width: 200px; /* Garante espaço para logo e nome */ flex-grow: 1; /* Tenta ocupar espaço disponível */ } 
+      header h1 {font-size: 1.2rem; } 
+      header .logo-container img {max-width: 45px; height: 45px;} 
+      .header-social-links { width: auto; margin-top: 5px; margin-left:0; justify-content: flex-end; width: 100%; padding-top: 5px;}
+      .header-social-links a {font-size: 1.2rem; margin-left: 10px; } 
       .menu-items {grid-template-columns: 1fr;} 
       .cart-item-actions {gap: 5px;} .cart-item-actions button {font-size: 1rem;} 
       .cart-section {padding: 15px 10px;} 
@@ -298,26 +195,34 @@
       .options-list {max-height: 120px;} 
       .modal-title {font-size: 1.3rem;} .options-group h4 {font-size: 1rem;} 
     }
-     @media (max-width: 420px) {
+     @media (max-width: 480px) { /* Ajuste mais fino para telas menores */
+        header .container-header { flex-direction: column; align-items: center; }
+        .header-left { margin-bottom: 8px; }
+        header h1 { text-align: center; }
+        .header-social-links { width: 100%; justify-content: center; margin-top: 8px; }
+        .header-social-links a { font-size: 1.3rem; margin: 0 10px; }
+
+        .category-btn { padding: 7px 14px; font-size: 0.85rem;}
+        .item-name { font-size: 1.1rem;}
+        .item-price { font-size: 1.05rem;}
+    }
+     @media (max-width: 380px) {
         header h1 { font-size: 1.1rem; }
         header .logo-container img { max-width: 40px; height: 40px; }
-        .header-social-links { justify-content: center; }
-        .header-social-links a { font-size: 1.2rem; margin: 0 8px; }
-        .category-btn { padding: 6px 12px; font-size: 0.8rem;}
-        .item-name { font-size: 1.05rem;}
-        .item-price { font-size: 1rem;}
-    }
+        .category-btn { padding: 6px 10px; font-size: 0.8rem;}
+     }
   </style>
 </head>
 <body>
   <header>
-    <div class="container"> 
-      <div class="header-left">
+    <!-- Container específico para o header para controlar o padding interno dele -->
+    <div class="container-header"> 
+      <a href="javascript:location.reload();" class="header-left" title="Voltar ao Início"> <!-- Link para recarregar a página -->
         <div class="logo-container">
           <img src="https://i.ibb.co/BKt5dFrX/logo-dlc-avo2.jpg" alt="Logo Delícias D'Avó">
         </div>
         <h1>Delícias D'Avó</h1>
-      </div>
+      </a>
       <div class="header-social-links">
         <a href="#" id="header-whatsapp-link" target="_blank" title="WhatsApp da Loja"><i class="fab fa-whatsapp"></i></a>
         <a href="#" id="header-instagram-link" target="_blank" title="Instagram da Loja"><i class="fab fa-instagram"></i></a>
@@ -326,7 +231,8 @@
     </div>
   </header>
   
-  <div class="container"> 
+  <!-- Container para o conteúdo principal da página -->
+  <div class="main-content-container"> 
     <div class="search-bar">
       <input type="text" id="search-input" placeholder="Buscar delícias...">
     </div>
@@ -434,7 +340,7 @@
         </div>
       </div>
        <div class="menu-item" data-category="bebidas">
-         <img src="data:image/jpeg;base64,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" alt="Suco de Uva Natural One" class="item-image" style="object-fit: contain; height: 180px; padding: 10px;">
+         <img src="https://acdn.mitiendanube.com/stores/001/334/898/products/suco-natural-one-uva-180ml1-a19893f59a823f447016269764371428-480-0.webp" alt="Suco de Uva Natural One" class="item-image" style="object-fit: contain; height: 180px; padding: 10px;">
         <div class="item-content">
           <div class="item-header">
             <h3 class="item-name">Suco Uva Natural One 180ml</h3>
@@ -448,17 +354,15 @@
   </div> 
   
   <div class="cart-icon"> <i class="fas fa-shopping-cart"></i> <span class="cart-count">0</span> </div>
-  <div class="cart-section"> <div class="container"> <div class="cart-header"> <h3 class="cart-title">Seu Pedido</h3> <button class="close-cart"><i class="fas fa-times"></i></button> </div> <div class="cart-items"></div> <div class="cart-total"> <span>Total:</span> <span class="total-amount">R$ 0,00</span> </div> <button class="checkout-btn" id="checkout-btn"> <i class="fab fa-whatsapp"></i> Finalizar Pedido </button> <div class="checkout-form" id="checkout-form"> <button class="back-to-cart" id="back-to-cart"> <i class="fas fa-arrow-left"></i> Voltar ao carrinho </button> <div class="form-group"> <label for="customer-name">Nome:</label> <input type="text" id="customer-name" placeholder="Seu nome completo" required> </div> <div class="form-group"> <label for="customer-phone">Telefone (WhatsApp):</label> <input type="tel" id="customer-phone" placeholder="(XX) XXXXX-XXXX" required> </div> <div class="form-group"> <label for="delivery-address">Endereço de Entrega (ou "Retirar no local"):</label> <input type="text" id="delivery-address" placeholder="Rua, número, bairro, complemento" required> </div> <div class="form-group"> <label for="order-notes">Observações:</label> <textarea id="order-notes" placeholder="Alguma observação sobre seu pedido?"></textarea> </div> <div class="payment-method"> <h4>Forma de Pagamento:</h4> <div class="payment-option"> <input type="radio" id="payment-pix" name="payment" value="Pix" checked> <label for="payment-pix">Pix</label> </div> <div class="payment-option"> <input type="radio" id="payment-card" name="payment" value="Cartão"> <label for="payment-card">Cartão via Link</label> </div> 
-  <!-- <div class="payment-option"> <input type="radio" id="payment-cash" name="payment" value="Dinheiro"> <label for="payment-cash">Dinheiro</label> </div> <div class="cash-group" id="cash-group"> <div class="form-group"> <label for="cash-amount">Valor em dinheiro para troco:</label> <input type="number" id="cash-amount" placeholder="Ex: 50"> </div> <div class="form-group"> <label>Troco:</label> <input type="text" id="change-amount" placeholder="R$ 0,00" readonly> </div> </div> </div>  -->
-  <button class="checkout-btn" id="send-order-btn"> <i class="fas fa-paper-plane"></i> Enviar Pedido </button> </div> </div> </div>
+  <div class="cart-section"> <div class="container-header"> <div class="cart-header"> <h3 class="cart-title">Seu Pedido</h3> <button class="close-cart"><i class="fas fa-times"></i></button> </div> <div class="cart-items"></div> <div class="cart-total"> <span>Total:</span> <span class="total-amount">R$ 0,00</span> </div> <button class="checkout-btn" id="checkout-btn"> <i class="fab fa-whatsapp"></i> Finalizar Pedido </button> <div class="checkout-form" id="checkout-form"> <button class="back-to-cart" id="back-to-cart"> <i class="fas fa-arrow-left"></i> Voltar ao carrinho </button> <div class="form-group"> <label for="customer-name">Nome:</label> <input type="text" id="customer-name" placeholder="Seu nome completo" required> </div> <div class="form-group"> <label for="customer-phone">Telefone (WhatsApp):</label> <input type="tel" id="customer-phone" placeholder="(XX) XXXXX-XXXX" required> </div> <div class="form-group"> <label for="delivery-address">Endereço de Entrega (ou "Retirar no local"):</label> <input type="text" id="delivery-address" placeholder="Rua, número, bairro, complemento" required> </div> <div class="form-group"> <label for="order-notes">Observações:</label> <textarea id="order-notes" placeholder="Alguma observação sobre seu pedido?"></textarea> </div> <div class="payment-method"> <h4>Forma de Pagamento:</h4> <div class="payment-option"> <input type="radio" id="payment-pix" name="payment" value="Pix" checked> <label for="payment-pix">Pix</label> </div> <div class="payment-option"> <input type="radio" id="payment-card" name="payment" value="Cartão"> <label for="payment-card">Cartão via Link</label> </div> <button class="checkout-btn" id="send-order-btn"> <i class="fas fa-paper-plane"></i> Enviar Pedido </button> </div> </div> </div>
   <div id="flavorModal" class="flavor-modal"> <div class="modal-content"> <span class="close-modal-btn">×</span> <h3 id="modalItemName" class="modal-title">Personalize seu Item</h3> <input type="hidden" id="editingItemIndex" value="-1"> <div id="modalFlavorOptions" class="options-group"> <h4>Escolha até <span id="maxFlavorsCount">0</span> opções:</h4> <div class="options-list" id="flavorList"></div> </div> <div id="modalToppingOptions" class="options-group"> <h4>Escolha até <span id="maxToppingsFreeCount">0</span> adicionais:</h4> <div class="options-list" id="toppingList"></div> <p id="extraToppingsInfo"></p></div> <p id="modalItemPriceInfo"></p> <button id="confirmFlavorSelection" class="modal-confirm-btn">Confirmar</button> </div> </div>
   
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      const CHAVE_PIX_LOJA = "12761768809"; // !!!! SUBSTITUA PELA CHAVE PIX REAL !!!!
-      const WHATSAPP_LOJA_LINK = "https://wa.me/5511978266024"; // !!!! SUBSTITUA PELO WHATSAPP REAL !!!!
-      const INSTAGRAM_LOJA_LINK = "https://www.instagram.com/deliciasda.avo/"; // !!!! SUBSTITUA PELO INSTAGRAM REAL !!!!
-      const ENDERECO_LOJA_TEXTO = "Rua Silveira Tavares, 67 Fundos, Bairro Parque Edu Chaves, São Paulo - SP"; // !!!! SUBSTITUA PELO ENDEREÇO REAL !!!!
+      const CHAVE_PIX_LOJA = "deliciasdavo@email.com.br"; 
+      const WHATSAPP_LOJA_LINK = "https://wa.me/5511978266024"; 
+      const INSTAGRAM_LOJA_LINK = "https://www.instagram.com/deliciasda.avo/"; 
+      const ENDERECO_LOJA_TEXTO = "Rua Silveira Tavares, 67 Fundos, Bairro Parque Edu Chaves, São Paulo - SP"; 
       const MAPS_LOJA_LINK = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ENDERECO_LOJA_TEXTO)}`;
 
       const cartIcon = document.querySelector('.cart-icon');
@@ -473,12 +377,12 @@
       const totalAmount = document.querySelector('.total-amount');
       const addToCartButtons = document.querySelectorAll('.add-to-cart');
       const categoryButtons = document.querySelectorAll('.category-btn');
-      const menuItems = document.querySelectorAll('.menu-item'); // Seleciona todos os itens do cardápio
+      const menuItems = document.querySelectorAll('.menu-item');
       const searchInput = document.getElementById('search-input');
       const paymentOptions = document.querySelectorAll('input[name="payment"]');
-      const cashGroup = document.getElementById('cash-group');
-      const cashAmount = document.getElementById('cash-amount');
-      const changeAmount = document.getElementById('change-amount');
+      const cashGroup = document.getElementById('cash-group'); // Ainda não usado, mas mantido
+      const cashAmount = document.getElementById('cash-amount'); // Ainda não usado
+      const changeAmount = document.getElementById('change-amount'); // Ainda não usado
       
       document.getElementById('header-whatsapp-link').href = WHATSAPP_LOJA_LINK;
       document.getElementById('header-instagram-link').href = INSTAGRAM_LOJA_LINK;
@@ -511,7 +415,6 @@
         cartItemsContainer.querySelectorAll('.remove-item').forEach(b => {b.addEventListener('click', function() {cart.splice(parseInt(this.dataset.index), 1); updateCart();});});
       }
       
-      // ---- INÍCIO DA LÓGICA DE FILTRAGEM CORRIGIDA ----
       categoryButtons.forEach(button => {
         button.addEventListener('click', function() {
           categoryButtons.forEach(btn => btn.classList.remove('active'));
@@ -531,10 +434,7 @@
               const itemCategory = item.dataset.category;
               const itemName = item.querySelector('.item-name').textContent.toLowerCase();
               const itemDescription = item.querySelector('.item-description').textContent.toLowerCase();
-              
               const categoryMatch = (category === 'todos' || itemCategory === category);
-              // Para a busca, verificamos se o termo de busca está no nome OU na descrição
-              // Se o termo de busca estiver vazio, consideramos que há uma correspondência.
               const searchTermMatch = (searchTerm === '' || itemName.includes(searchTerm) || itemDescription.includes(searchTerm));
               
               if (categoryMatch && searchTermMatch) {
@@ -544,32 +444,31 @@
               }
           });
       }
-      // ---- FIM DA LÓGICA DE FILTRAGEM CORRIGIDA ----
       
-      paymentOptions.forEach(opt => {opt.addEventListener('change', function() {cashGroup.style.display = (this.value === 'Dinheiro' ? 'block' : 'none');if (this.value !== 'Dinheiro') {cashAmount.value = '';changeAmount.value = 'R$ 0,00';}});});
-      cashAmount.addEventListener('input', function() {const totalPrice = parseFloat(totalAmount.textContent.replace('R$', '').replace(',', '.'));const cashValue = parseFloat(this.value) || 0;const change = cashValue - totalPrice;changeAmount.value = (change >= 0) ? `R$ ${change.toFixed(2).replace('.', ',')}` : 'Valor insuficiente';});
+      paymentOptions.forEach(opt => {opt.addEventListener('change', function() { if(cashGroup) cashGroup.style.display = (this.value === 'Dinheiro' ? 'block' : 'none');if (this.value !== 'Dinheiro') { if(cashAmount) cashAmount.value = ''; if(changeAmount) changeAmount.value = 'R$ 0,00';}});});
+      if(cashAmount) cashAmount.addEventListener('input', function() {const totalPrice = parseFloat(totalAmount.textContent.replace('R$', '').replace(',', '.'));const cashValue = parseFloat(this.value) || 0;const change = cashValue - totalPrice; if(changeAmount) changeAmount.value = (change >= 0) ? `R$ ${change.toFixed(2).replace('.', ',')}` : 'Valor insuficiente';});
       
       sendOrderBtn.addEventListener('click', function() {
         const name = document.getElementById('customer-name').value.trim(); const phone = document.getElementById('customer-phone').value.trim(); const address = document.getElementById('delivery-address').value.trim(); const notes = document.getElementById('order-notes').value.trim();
         const paymentMethodElement = document.querySelector('input[name="payment"]:checked'); if (!paymentMethodElement) {alert('Selecione forma de pagamento.'); return;} const paymentMethod = paymentMethodElement.value;
         if (!name) { alert('Preencha Nome.'); return; } if (!phone) { alert('Preencha Telefone.'); return; } if (!address) { alert('Preencha Endereço.'); return; }
-        if (paymentMethod === 'Dinheiro') {const totalPrice = parseFloat(totalAmount.textContent.replace('R$', '').replace(',', '.'));const cashValue = parseFloat(cashAmount.value) || 0;if (!cashAmount.value || cashValue < totalPrice) {alert('Valor para troco insuficiente.'); return;}}
+        if (paymentMethod === 'Dinheiro' && cashAmount) {const totalPrice = parseFloat(totalAmount.textContent.replace('R$', '').replace(',', '.'));const cashValue = parseFloat(cashAmount.value) || 0;if (!cashAmount.value || cashValue < totalPrice) {alert('Valor para troco insuficiente.'); return;}}
         
         let message = `👵 *NOVO PEDIDO - Delícias D'Avó*\n\n*Cliente:* ${name}\n*Telefone:* ${phone}\n*Endereço:* ${address}\n`;
         if (notes) {message += `*Observações:* ${notes}\n`;} message += `\n*Itens do Pedido:*\n`; 
         cart.forEach(item => {message += `- *${item.name}* (${item.quantity}x) - R$ ${(item.price * item.quantity).toFixed(2).replace('.', ',')}\n`; });
         message += `\n*Total do Pedido:* ${totalAmount.textContent}\n*Forma de Pagamento:* ${paymentMethod}\n`;
         if (paymentMethod === 'Pix') {message += `*Chave Pix para pagamento:* ${CHAVE_PIX_LOJA}\n_(Após o pagamento, por favor, envie o comprovante aqui no chat.)_\n`;}
-        if (paymentMethod === 'Dinheiro') {message += `*Valor Pago:* R$ ${parseFloat(cashAmount.value).toFixed(2).replace('.', ',')}\n*Troco:* ${changeAmount.value}\n`;}
+        if (paymentMethod === 'Dinheiro' && cashAmount && changeAmount) {message += `*Valor Pago:* R$ ${parseFloat(cashAmount.value).toFixed(2).replace('.', ',')}\n*Troco:* ${changeAmount.value}\n`;}
         
         const whatsappNumberOnly = WHATSAPP_LOJA_LINK.replace('https://wa.me/', '').split('?')[0];
         const finalURL = `https://wa.me/${whatsappNumberOnly}?text=${encodeURIComponent(message)}`;
         window.open(finalURL, '_blank');
         cart = []; updateCart();checkoutForm.style.display = 'none';cartItemsContainer.style.display = 'block';document.querySelector('.cart-header').style.display = 'flex';document.querySelector('.cart-total').style.display = 'flex';checkoutBtn.style.display = 'flex';cartSection.classList.remove('show');
-        ['customer-name', 'customer-phone', 'delivery-address', 'order-notes', 'cash-amount', 'change-amount'].forEach(id => document.getElementById(id).value = '');
-        document.getElementById('payment-pix').checked = true; cashGroup.style.display = 'none';
+        ['customer-name', 'customer-phone', 'delivery-address', 'order-notes', 'cash-amount', 'change-amount'].forEach(id => { const el = document.getElementById(id); if (el) el.value = '';});
+        document.getElementById('payment-pix').checked = true; if(cashGroup) cashGroup.style.display = 'none';
       });
-      filterMenuItems('todos', ''); // Aplica filtro inicial (mostrar todos)
+      filterMenuItems('todos', ''); 
       updateCart(); 
     });
   </script>
